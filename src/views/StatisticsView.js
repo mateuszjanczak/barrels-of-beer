@@ -4,7 +4,10 @@ import styled from "styled-components";
 export class StatisticsView extends React.Component {
     render() {
         return (
-            <Heading>Statystyki</Heading>
+            <div>
+                <Heading>Statystyki</Heading>
+                <p className="text-center">W trakcie tworzenia...</p>
+            </div>
         )
     }
 }

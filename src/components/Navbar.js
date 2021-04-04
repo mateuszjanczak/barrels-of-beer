@@ -6,9 +6,9 @@ const Navbar = () => (
         <div className="container-fluid">
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
+                    {/*<li className="nav-item">
                         <NavLink to={routes.homepage} className="nav-link active">Strona główna</NavLink>
-                    </li>
+                    </li>*/}
                     <li className="nav-item">
                         <NavLink to={routes.barrels} className="nav-link active">Beczki</NavLink>
                     </li>
