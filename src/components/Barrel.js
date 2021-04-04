@@ -1,29 +1,48 @@
 import BarrelImg from './../assets/barrel.png';
 import styled from "styled-components";
 import {routes} from "../routes/Routes";
-import {Link} from "react-router-dom";
+import {withRouter} from "react-router-dom";
+import {Component} from "react";
 
-const Barrel = () => (
-    <Wrapper>
-        <Details>
-            <h3>barrelName</h3>
-            <h6>beerType</h6>
-        </Details>
+class Barrel extends Component {
 
-        <Container>
-            <GrayImg src={BarrelImg} alt={"Barrel"}/>
-            <ColorImg src={BarrelImg} alt={"Barrel"}/>
-            <Status>50%</Status>
-        </Container>
+    handleHit = (id) => {
+        const { fetchBarrelsFn } = this.props;
+        fetch('http://localhost:8080/barrels/' + id + '/hit').then(() => fetchBarrelsFn());
+    }
 
-        <Nav>
-            <button className="btn btn-primary">Impuls</button>
-            <Link to={routes.barrelsSet}>
-                <button className="btn btn-primary">Ustaw</button>
-            </Link>
-        </Nav>
-    </Wrapper>
-);
+    handleSet = (id) => {
+        const { history } = this.props;
+        history.push(`${routes.barrelsSet}/${id}`);
+    }
+
+    render() {
+        const { details } = this.props;
+        const { id, barrelName, beerType, capacity, totalCapacity} = details;
+        const percent = (capacity / totalCapacity);
+
+        return (
+            <Wrapper>
+                <Details>
+                    <h3>{barrelName}</h3>
+                    <h4>{beerType}</h4>
+                    <h6>{capacity} / {totalCapacity} L</h6>
+                </Details>
+
+                <Container>
+                    <GrayImg src={BarrelImg} alt={"Barrel"}/>
+                    <ColorImg percent={percent} src={BarrelImg} alt={"Barrel"}/>
+                    <Status>{(percent * 100).toFixed(0)}%</Status>
+                </Container>
+
+                <Nav>
+                    <button className="btn btn-primary" onClick={() => this.handleHit(id)}>Impuls</button>
+                    <button className="btn btn-primary" onClick={() => this.handleSet(id)}>Ustaw</button>
+                </Nav>
+            </Wrapper>
+        );
+    }
+}
 
 const Wrapper = styled.div`
     
@@ -50,13 +69,19 @@ const Nav = styled.div`
 const GrayImg = styled.img`
   position: absolute;
   width: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   filter: grayscale(100%);
 `;
 
 const ColorImg = styled.img`
   position: absolute;
   width: 300px;
-  clip: rect(calc(300px - (300px * 0.5)), 300px, 300px, 0px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  clip: rect(calc(300px - (300px * ${props => props.percent})), 300px, 300px, 0px);
   z-index: 100;
 `;
 
@@ -70,4 +95,4 @@ const Status = styled.div`
   font-weight: 600;
 `;
 
-export default Barrel;
+export default withRouter(Barrel);

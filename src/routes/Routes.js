@@ -3,5 +3,7 @@ export const routes = {
     barrels: '/barrels',
     barrelsAdd: '/barrels/add',
     barrelsSet: '/barrels/set',
-    statistics: '/statistics'
+    barrelsSetId: '/barrels/set/:id',
+    statistics: '/statistics',
+    logs: '/logs'
 }

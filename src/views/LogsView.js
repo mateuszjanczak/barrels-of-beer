@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
 
-export class HomepageView extends React.Component {
+export class LogsView extends React.Component {
     render() {
         return (
-            <Heading>Strona główna</Heading>
+            <Heading>Logi</Heading>
         )
     }
 }

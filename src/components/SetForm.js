@@ -1,21 +1,73 @@
-const AddForm = () => (
-    <form>
-        <div className="mb-3">
-            <label htmlFor="name" className="form-label">Nazwa beczki</label>
-            <input type="text" className="form-control" id="name" disabled/>
-        </div>
+import {Component} from "react";
+import {routes} from "../routes/Routes";
+import {withRouter} from "react-router-dom";
 
-        <div className="mb-3">
-            <label htmlFor="beer" className="form-label">Rodzaj piwa</label>
-            <input type="text" className="form-control" id="beer"/>
-        </div>
+class SetForm extends Component {
 
-        <div className="mb-3">
-            <label htmlFor="capacity" className="form-label">Ilość piwa w [L]</label>
-            <input type="number" className="form-control" id="capacity"/>
-        </div>
-        <button type="submit" className="btn btn-primary">Ustaw</button>
-    </form>
-);
+    state = {
+        id: "",
+        barrelName: "",
+        beerType: "",
+        capacity: ""
+    }
 
-export default AddForm;
+    componentDidMount() {
+        const { id } = this.props;
+        this.setState({
+            id
+        })
+
+        this.fetchBarrel(id);
+    }
+
+    fetchBarrel = (id) => {
+        fetch('http://localhost:8080/barrels/' + id).then(data => data.json()).then(barrel => this.setState({...barrel}))
+    }
+
+    handleFormSubmit = (id) => {
+        const { beerType, capacity } = this.state;
+
+        fetch('http://localhost:8080/barrels/' + id + '/set', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                beerType,
+                capacity
+            })
+        }).then(() => this.props.history.push(routes.barrels))
+    }
+
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
+    render() {
+
+        const { barrelName, beerType, capacity, id } = this.state;
+
+        return (
+            <div>
+                <div className="mb-3">
+                    <label htmlFor="barrelName" className="form-label">Nazwa beczki</label>
+                    <input type="text" className="form-control" id="barrelName" value={barrelName} disabled/>
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="beerType" className="form-label">Rodzaj piwa</label>
+                    <input type="text" className="form-control" id="beerType" name="beerType" value={beerType} onChange={this.handleChange}/>
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="capacity" className="form-label">Ilość piwa w [L]</label>
+                    <input type="number" className="form-control" id="capacity" name="capacity" value={capacity} onChange={this.handleChange}/>
+                </div>
+                <button className="btn btn-primary" onClick={() => this.handleFormSubmit(id)}>Ustaw</button>
+            </div>
+        );
+    }
+}
+
+export default withRouter(SetForm);

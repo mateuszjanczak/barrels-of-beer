@@ -13,6 +13,7 @@ import {BarrelsView} from "./views/BarrelsView";
 import {StatisticsView} from "./views/StatisticsView";
 import {BarrelsFormAddView} from "./views/BarrelsFormAddView";
 import {BarrelsFormSetView} from "./views/BarrelsFormSetView";
+import {LogsView} from "./views/LogsView";
 
 const App = () => (
     <Router>
@@ -24,7 +25,8 @@ const App = () => (
                 <Route exact path={routes.barrels} component={BarrelsView} />
                 <Route exact path={routes.statistics} component={StatisticsView} />
                 <Route exact path={routes.barrelsAdd} component={BarrelsFormAddView} />
-                <Route exact path={routes.barrelsSet} component={BarrelsFormSetView} />
+                <Route exact path={routes.logs} component={LogsView} />
+                <Route path={routes.barrelsSetId} component={BarrelsFormSetView} />
             </Switch>
         </Container>
     </Router>

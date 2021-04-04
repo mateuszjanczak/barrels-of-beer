@@ -5,6 +5,22 @@ import {Link} from "react-router-dom";
 import {routes} from "../routes/Routes";
 
 export class BarrelsView extends React.Component {
+
+    state = {
+        barrels: []
+    }
+
+
+    componentDidMount() {
+        this.fetchBarrels();
+    }
+
+    fetchBarrels = () => {
+        fetch('http://localhost:8080/barrels')
+            .then(data => data.json())
+            .then(barrels  => this.setState({ barrels }));
+    }
+
     render() {
         return (
             <Wrapper>
@@ -17,12 +33,7 @@ export class BarrelsView extends React.Component {
                 </Nav>
 
                 <Items>
-                    <Barrel />
-                    <Barrel />
-                    <Barrel />
-                    <Barrel />
-                    <Barrel />
-                    <Barrel />
+                    {this.state.barrels.map(details => (<Barrel key={details.id} fetchBarrelsFn={this.fetchBarrels} details={details}/>))}
                 </Items>
             </Wrapper>
         )
@@ -30,7 +41,7 @@ export class BarrelsView extends React.Component {
 }
 
 const Wrapper = styled.div`
-  
+  margin-bottom: 5rem;
 `;
 
 const Heading = styled.h1`
@@ -45,6 +56,6 @@ const Nav = styled.div`
 
 const Items = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
 `;

@@ -4,9 +4,11 @@ import SetForm from "../components/SetForm";
 
 export class BarrelsFormSetView extends React.Component {
     render() {
+        const { id } = this.props.match.params;
+
         return (
             <Wrapper>
-                <SetForm />
+                <SetForm id={id} />
             </Wrapper>
         )
     }
