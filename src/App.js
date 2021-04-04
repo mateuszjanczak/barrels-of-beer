@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+import styled from 'styled-components';
+import {routes} from "./routes/Routes";
+import GlobalStyle from "./theme/Theme";
+import Navbar from "./components/Navbar";
+import {HomepageView} from "./views/HomepageView";
+import {BarrelsView} from "./views/BarrelsView";
+import {StatisticsView} from "./views/StatisticsView";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+    <Router>
+        <GlobalStyle />
+        <Navbar />
+        <Container className={["container", "mt-5", "text-white"]}>
+            <Switch>
+                <Route exact path={routes.homepage} component={HomepageView} />
+                <Route exact path={routes.barrels} component={BarrelsView} />
+                <Route exact path={routes.statistics} component={StatisticsView} />
+            </Switch>
+        </Container>
+    </Router>
+);
+
+const Container = styled.div`
+    
+`;
 
 export default App;
