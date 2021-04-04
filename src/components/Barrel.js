@@ -1,17 +1,50 @@
 import BarrelImg from './../assets/barrel.png';
 import styled from "styled-components";
+import {routes} from "../routes/Routes";
+import {Link} from "react-router-dom";
 
 const Barrel = () => (
     <Wrapper>
-        <GrayImg src={BarrelImg} alt={"Barrel"}/>
-        <ColorImg src={BarrelImg} alt={"Barrel"}/>
-        <Status>50%</Status>
+        <Details>
+            <h3>barrelName</h3>
+            <h6>beerType</h6>
+        </Details>
+
+        <Container>
+            <GrayImg src={BarrelImg} alt={"Barrel"}/>
+            <ColorImg src={BarrelImg} alt={"Barrel"}/>
+            <Status>50%</Status>
+        </Container>
+
+        <Nav>
+            <button className="btn btn-primary">Impuls</button>
+            <Link to={routes.barrelsSet}>
+                <button className="btn btn-primary">Ustaw</button>
+            </Link>
+        </Nav>
     </Wrapper>
 );
 
 const Wrapper = styled.div`
+    
+`;
+
+const Details = styled.div`
+    text-align: center;
+`;
+
+const Container = styled.div`
   position: relative;
   height: 300px;
+`;
+
+const Nav = styled.div`
+  text-align: center;
+  margin-top: 1rem;
+  
+  > button {
+    margin: 0 0.5rem;
+  }
 `;
 
 const GrayImg = styled.img`

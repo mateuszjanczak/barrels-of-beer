@@ -11,6 +11,8 @@ import Navbar from "./components/Navbar";
 import {HomepageView} from "./views/HomepageView";
 import {BarrelsView} from "./views/BarrelsView";
 import {StatisticsView} from "./views/StatisticsView";
+import {BarrelsFormAddView} from "./views/BarrelsFormAddView";
+import {BarrelsFormSetView} from "./views/BarrelsFormSetView";
 
 const App = () => (
     <Router>
@@ -21,6 +23,8 @@ const App = () => (
                 <Route exact path={routes.homepage} component={HomepageView} />
                 <Route exact path={routes.barrels} component={BarrelsView} />
                 <Route exact path={routes.statistics} component={StatisticsView} />
+                <Route exact path={routes.barrelsAdd} component={BarrelsFormAddView} />
+                <Route exact path={routes.barrelsSet} component={BarrelsFormSetView} />
             </Switch>
         </Container>
     </Router>
