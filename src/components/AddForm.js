@@ -1,6 +1,7 @@
 import {Component} from "react";
 import { withRouter } from "react-router-dom";
 import {routes} from "../routes/Routes";
+import {API_URL} from "../service/Api";
 
 class AddForm extends Component {
 
@@ -10,7 +11,7 @@ class AddForm extends Component {
     }
 
     handleFormSubmit = () => {
-        fetch('http://localhost:8080/barrels/add', {
+        fetch(API_URL + '/barrels/add', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

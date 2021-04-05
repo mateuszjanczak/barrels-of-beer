@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import {API_URL} from "../service/Api";
 
 export class LogsView extends React.Component {
 
@@ -12,7 +13,7 @@ export class LogsView extends React.Component {
     }
 
     fetchLogs = () => {
-        fetch('http://localhost:8080/logs')
+        fetch(API_URL + '/logs')
             .then(data => data.json())
             .then(logs  => this.setState({ logs }));
     }

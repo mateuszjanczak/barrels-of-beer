@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {routes} from "../routes/Routes";
 import {withRouter} from "react-router-dom";
+import {API_URL} from "../service/Api";
 
 class SetForm extends Component {
 
@@ -21,13 +22,13 @@ class SetForm extends Component {
     }
 
     fetchBarrel = (id) => {
-        fetch('http://localhost:8080/barrels/' + id).then(data => data.json()).then(barrel => this.setState({...barrel}))
+        fetch(API_URL + '/barrels/' + id).then(data => data.json()).then(barrel => this.setState({...barrel}))
     }
 
     handleFormSubmit = (id) => {
         const { beerType, capacity } = this.state;
 
-        fetch('http://localhost:8080/barrels/' + id + '/set', {
+        fetch(API_URL + '/barrels/' + id + '/set', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

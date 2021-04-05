@@ -3,6 +3,7 @@ import Barrel from "../components/Barrel";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {routes} from "../routes/Routes";
+import {API_URL} from "../service/Api";
 
 export class BarrelsView extends React.Component {
 
@@ -10,13 +11,12 @@ export class BarrelsView extends React.Component {
         barrels: []
     }
 
-
     componentDidMount() {
         this.fetchBarrels();
     }
 
     fetchBarrels = () => {
-        fetch('http://localhost:8080/barrels')
+        fetch(API_URL + '/barrels')
             .then(data => data.json())
             .then(barrels  => this.setState({ barrels }));
     }

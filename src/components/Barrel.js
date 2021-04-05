@@ -3,12 +3,13 @@ import styled from "styled-components";
 import {routes} from "../routes/Routes";
 import {withRouter} from "react-router-dom";
 import {Component} from "react";
+import {API_URL} from "../service/Api";
 
 class Barrel extends Component {
 
     handleHit = (id) => {
         const { fetchBarrelsFn } = this.props;
-        fetch('http://localhost:8080/barrels/' + id + '/hit').then(() => fetchBarrelsFn());
+        fetch(API_URL + '/barrels/' + id + '/hit').then(() => fetchBarrelsFn());
     }
 
     handleSet = (id) => {
