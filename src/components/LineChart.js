@@ -15,7 +15,7 @@ class LineChart extends React.Component {
     }
 
     componentDidMount() {
-        const labels = [...this.props.data.map(item => item.barrelName + " - " + item.beerType)];
+        const labels = [...this.props.data.map(item => item.barrelName)];
 
         const data = {
             labels: labels,
