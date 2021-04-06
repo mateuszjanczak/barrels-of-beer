@@ -18,6 +18,9 @@ const Navbar = () => (
                     <li className="nav-item">
                         <NavLink to={routes.logs} className="nav-link active">Logi</NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink to={routes.readme} className="nav-link active fw-bold">Instrukcja</NavLink>
+                    </li>
                 </ul>
             </div>
         </div>

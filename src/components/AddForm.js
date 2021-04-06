@@ -29,7 +29,7 @@ class AddForm extends Component {
         return (
             <div>
                 <div className="mb-3">
-                    <label htmlFor="id" className="form-label">Numer beczki</label>
+                    <label htmlFor="id" className="form-label">Numer beczki / kraniku</label>
                     <input type="number" className="form-control" id="id" name="id" value={this.state.id} onChange={this.handleChange}/>
                 </div>
                 <div className="mb-3">

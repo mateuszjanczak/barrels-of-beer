@@ -5,5 +5,6 @@ export const routes = {
     barrelsSet: '/barrels/set',
     barrelsSetId: '/barrels/set/:id',
     statistics: '/statistics',
-    logs: '/logs'
+    logs: '/logs',
+    readme: '/readme'
 }
