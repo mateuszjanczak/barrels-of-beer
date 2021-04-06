@@ -6,7 +6,7 @@ import {API_URL} from "../service/Api";
 class AddForm extends Component {
 
     state = {
-        barrelName: "",
+        id: "",
         totalCapacity: ""
     }
 
@@ -29,8 +29,8 @@ class AddForm extends Component {
         return (
             <div>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Nazwa beczki</label>
-                    <input type="text" className="form-control" id="barrelName" name="barrelName" value={this.state.barrelName} onChange={this.handleChange}/>
+                    <label htmlFor="id" className="form-label">Numer beczki / kraniku</label>
+                    <input type="number" className="form-control" id="id" name="id" value={this.state.id} onChange={this.handleChange}/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="capacity" className="form-label">Pojemność [L]</label>

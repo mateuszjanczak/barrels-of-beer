@@ -8,7 +8,6 @@ class SetForm extends Component {
     state = {
         id: "",
         barrelName: "",
-        beerType: "",
         capacity: ""
     }
 
@@ -26,7 +25,7 @@ class SetForm extends Component {
     }
 
     handleFormSubmit = (id) => {
-        const { beerType, capacity } = this.state;
+        const { barrelName, capacity } = this.state;
 
         fetch(API_URL + '/barrels/' + id + '/set', {
             headers: {
@@ -35,7 +34,7 @@ class SetForm extends Component {
             },
             method: 'POST',
             body: JSON.stringify({
-                beerType,
+                barrelName,
                 capacity
             })
         }).then(() => this.props.history.push(routes.barrels))
@@ -47,18 +46,18 @@ class SetForm extends Component {
 
     render() {
 
-        const { barrelName, beerType, capacity, id } = this.state;
+        const {barrelName, capacity, id } = this.state;
 
         return (
             <div>
                 <div className="mb-3">
-                    <label htmlFor="barrelName" className="form-label">Nazwa beczki</label>
-                    <input type="text" className="form-control" id="barrelName" value={barrelName} disabled/>
+                    <label htmlFor="id" className="form-label">Numer beczki</label>
+                    <input type="text" className="form-control" id="id" value={id} disabled/>
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="beerType" className="form-label">Rodzaj piwa</label>
-                    <input type="text" className="form-control" id="beerType" name="beerType" value={beerType} onChange={this.handleChange}/>
+                    <label htmlFor="beerType" className="form-label">Zawartość beczki</label>
+                    <input type="text" className="form-control" id="barrelName" name="barrelName" value={barrelName} onChange={this.handleChange}/>
                 </div>
 
                 <div className="mb-3">

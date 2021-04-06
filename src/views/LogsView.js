@@ -28,20 +28,20 @@ export class LogsView extends React.Component {
                         <thead>
                         {this.state.logs.length > 0 &&
                         <tr>
-                            <th scope="col">Id operacji</th>
-                            <th scope="col">Nazwa beczki</th>
-                            <th scope="col">Typ piwa</th>
+                            <th scope="col">Identyfikator operacji</th>
+                            <th scope="col">Numer beczki</th>
+                            <th scope="col">Zawartość beczki</th>
                             <th scope="col">Stan</th>
                             <th scope="col">Data</th>
                             <th scope="col">Typ operacji</th>
                         </tr>}
                         </thead>
                         <tbody>
-                        {this.state.logs.map(({id, barrelId, barrelName, beerType, capacity, date, logType}) => (
+                        {this.state.logs.map(({id, barrelId, barrelName, capacity, date, logType}) => (
                             <tr key={id}>
                                 <th scope="row">{id}</th>
+                                <td>{barrelId}</td>
                                 <td>{barrelName}</td>
-                                <td>{beerType}</td>
                                 <td>{capacity} L</td>
                                 <td>{date.substring(0, 19).replace('T', ' ')}</td>
                                 <td>{logType}</td>

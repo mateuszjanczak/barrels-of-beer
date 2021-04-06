@@ -19,14 +19,14 @@ class Barrel extends Component {
 
     render() {
         const { details } = this.props;
-        const { id, barrelName, beerType, capacity, totalCapacity} = details;
+        const { id, barrelName, capacity, totalCapacity} = details;
         const percent = (capacity / totalCapacity);
 
         return (
             <Wrapper>
                 <Details>
-                    <h3>{barrelName}</h3>
-                    <h4>{beerType}</h4>
+                    <h3>Beczka {id}</h3>
+                    <h4>{barrelName}</h4>
                     <h6>{capacity} / {totalCapacity} L</h6>
                 </Details>
 
