@@ -8,6 +8,7 @@ class SetForm extends Component {
     state = {
         id: "",
         barrelName: "",
+        barrelContent: "",
         capacity: ""
     }
 
@@ -20,14 +21,14 @@ class SetForm extends Component {
         this.fetchBarrel(id);
     }
 
-    fetchBarrel = (id) => {
-        fetch(API_URL + '/barrels/' + id).then(data => data.json()).then(barrel => this.setState({...barrel}))
+    fetchBarrel = (barrelTapId) => {
+        fetch(API_URL + '/barrelTaps/' + barrelTapId).then(data => data.json()).then(barrel => this.setState({...barrel}))
     }
 
-    handleFormSubmit = (id) => {
-        const { barrelName, capacity } = this.state;
+    handleFormSubmit = (barrelTapId) => {
+        const { barrelName, barrelContent, capacity } = this.state;
 
-        fetch(API_URL + '/barrels/' + id + '/set', {
+        fetch(API_URL + '/barrelTaps/' + barrelTapId + '/set', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -35,6 +36,7 @@ class SetForm extends Component {
             method: 'POST',
             body: JSON.stringify({
                 barrelName,
+                barrelContent,
                 capacity
             })
         }).then(() => this.props.history.push(routes.barrels))
@@ -46,18 +48,23 @@ class SetForm extends Component {
 
     render() {
 
-        const {barrelName, capacity, id } = this.state;
+        const {barrelName, barrelContent, capacity, id } = this.state;
 
         return (
             <div>
                 <div className="mb-3">
-                    <label htmlFor="id" className="form-label">Numer beczki</label>
+                    <label htmlFor="id" className="form-label">Numer kraniku</label>
                     <input type="text" className="form-control" id="id" value={id} disabled/>
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="beerType" className="form-label">Zawartość beczki</label>
+                    <label htmlFor="beerType" className="form-label">Kod beczki</label>
                     <input type="text" className="form-control" id="barrelName" name="barrelName" value={barrelName} onChange={this.handleChange}/>
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="beerType" className="form-label">Zawartość beczki</label>
+                    <input type="text" className="form-control" id="barrelContent" name="barrelContent" value={barrelContent} onChange={this.handleChange}/>
                 </div>
 
                 <div className="mb-3">

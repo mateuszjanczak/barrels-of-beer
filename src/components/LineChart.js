@@ -9,13 +9,13 @@ class LineChart extends React.Component {
     }
 
     componentDidUpdate() {
-        this.myChart.data.labels = [...this.props.data.map(item => item.barrelName)];
+        this.myChart.data.labels = [...this.props.data.map(item => item.barrelContent)];
         this.myChart.data.datasets[0].data = [...this.props.data.map(item => item.count)];
         this.myChart.update();
     }
 
     componentDidMount() {
-        const labels = [...this.props.data.map(item => item.barrelName)];
+        const labels = [...this.props.data.map(item => item.barrelContent)];
 
         const data = {
             labels: labels,
@@ -49,7 +49,8 @@ class LineChart extends React.Component {
                         },
                         ticks: {
                             beginAtZero: true,
-                            suggestedMax: 1.5 * Math.max(...this.props.data.map(item => parseInt(item.count)))
+                            suggestedMax: 1.5 * Math.max(...this.props.data.map(item => parseInt(item.count))),
+                            fontSize: 20
                         }
                     }]
                 }

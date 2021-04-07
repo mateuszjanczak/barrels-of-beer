@@ -7,26 +7,27 @@ import {API_URL} from "../service/Api";
 
 class Barrel extends Component {
 
-    handleHit = (id) => {
+    handleHit = (barrelTapId) => {
         const { fetchBarrelsFn } = this.props;
-        fetch(API_URL + '/barrels/' + id + '/hit').then(() => fetchBarrelsFn());
+        fetch(API_URL + '/barrelTaps/' + barrelTapId + '/hit').then(() => fetchBarrelsFn());
     }
 
-    handleSet = (id) => {
+    handleSet = (barrelTapId) => {
         const { history } = this.props;
-        history.push(`${routes.barrelsSet}/${id}`);
+        history.push(`${routes.barrelsSet}/${barrelTapId}`);
     }
 
     render() {
         const { details } = this.props;
-        const { id, barrelName, capacity, totalCapacity} = details;
+        const { barrelTapId, barrelName, barrelContent, capacity, totalCapacity} = details;
         const percent = (capacity / totalCapacity);
 
         return (
             <Wrapper>
                 <Details>
-                    <h3>Beczka {id}</h3>
+                    <h3>Kranik {barrelTapId}</h3>
                     <h4>{barrelName}</h4>
+                    <h4>{barrelContent}</h4>
                     <h6>{capacity} / {totalCapacity} L</h6>
                 </Details>
 
@@ -37,8 +38,8 @@ class Barrel extends Component {
                 </Container>
 
                 <Nav>
-                    <button className="btn btn-primary" onClick={() => this.handleHit(id)}>Impuls</button>
-                    <button className="btn btn-primary" onClick={() => this.handleSet(id)}>Ustaw</button>
+                    <button className="btn btn-primary" onClick={() => this.handleHit(barrelTapId)}>Impuls</button>
+                    <button className="btn btn-primary" onClick={() => this.handleSet(barrelTapId)}>Ustaw</button>
                 </Nav>
             </Wrapper>
         );

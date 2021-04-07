@@ -6,12 +6,11 @@ import {API_URL} from "../service/Api";
 class AddForm extends Component {
 
     state = {
-        id: "",
-        totalCapacity: ""
+        barrelTapId: ""
     }
 
     handleFormSubmit = () => {
-        fetch(API_URL + '/barrels/add', {
+        fetch(API_URL + '/barrelTaps/add', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -29,14 +28,14 @@ class AddForm extends Component {
         return (
             <div>
                 <div className="mb-3">
-                    <label htmlFor="id" className="form-label">Numer beczki / kraniku</label>
-                    <input type="number" className="form-control" id="id" name="id" value={this.state.id} onChange={this.handleChange}/>
+                    <label htmlFor="id" className="form-label">Numer kraniku</label>
+                    <input type="number" className="form-control" id="barrelTapId" name="barrelTapId" value={this.state.barrelTapId} onChange={this.handleChange}/>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="capacity" className="form-label">Pojemność [L]</label>
+{/*                <div className="mb-3">
+                    <label htmlFor="capacity" className="form-label">Typ mieszanki</label>
                     <input type="number" className="form-control" id="totalCapacity" name="totalCapacity" value={this.state.totalCapacity} onChange={this.handleChange}/>
-                </div>
-                <button className="btn btn-primary" onClick={this.handleFormSubmit}>Dodaj beczkę</button>
+                </div>*/}
+                <button className="btn btn-primary" onClick={this.handleFormSubmit}>Dodaj kranik</button>
             </div>
         );
     }

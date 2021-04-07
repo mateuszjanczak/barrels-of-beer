@@ -16,7 +16,7 @@ export class BarrelsView extends React.Component {
     }
 
     fetchBarrels = () => {
-        fetch(API_URL + '/barrels')
+        fetch(API_URL + '/barrelTaps')
             .then(data => data.json())
             .then(barrels  => this.setState({ barrels }));
     }
@@ -28,7 +28,7 @@ export class BarrelsView extends React.Component {
 
                 <Nav>
                     <Link to={routes.barrelsAdd}>
-                        <button type="button" className="btn btn-light">Dodaj beczkę</button>
+                        <button type="button" className="btn btn-light">Dodaj kranik</button>
                     </Link>
                 </Nav>
 

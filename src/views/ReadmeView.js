@@ -13,7 +13,7 @@ export class ReadmeView extends React.Component {
     }
 
     fetchBarrels = () => {
-        fetch(API_URL + '/barrels')
+        fetch(API_URL + '/barrelTaps')
             .then(data => data.json())
             .then(barrels  => this.setState({ barrels }));
     }
@@ -38,19 +38,19 @@ export class ReadmeView extends React.Component {
                 </div>
 
                 <Instruction>
-                    <h2>Tworzenie beczek</h2>
+                    <h2>Tworzenie kraników</h2>
                     <ul className="list-group">
-                        <li className="list-group-item">1. Wybierz przycisk 'Dodaj beczkę' na stronie głównej</li>
-                        <li className="list-group-item">2. W formularzu podaj numer beczki oraz jej pojemność w litrach</li>
+                        <li className="list-group-item">1. Wybierz przycisk 'Dodaj kranik' na stronie głównej</li>
+                        <li className="list-group-item">2. W formularzu podaj numer kraniku</li>
                         <li className="list-group-item">3. Wyślij formularz</li>
                     </ul>
                 </Instruction>
 
                 <Instruction>
-                    <h2>Uzupełnianie beczki</h2>
+                    <h2>Ustawianie beczki</h2>
                     <ul className="list-group">
-                        <li className="list-group-item">1. Wybierz przycisk 'Ustaw' przy wybranej beczce</li>
-                        <li className="list-group-item">2. W formularzu podaj zawartość beczki (typ piwa) oraz jej stan w litrach</li>
+                        <li className="list-group-item">1. Wybierz przycisk 'Ustaw' przy wybranym kraniku</li>
+                        <li className="list-group-item">2. W formularzu podaj kod beczki, zawartość beczki oraz pojemność beczki w litrach</li>
                         <li className="list-group-item">3. Wyślij formularz</li>
                     </ul>
                 </Instruction>
@@ -58,18 +58,18 @@ export class ReadmeView extends React.Component {
                 <Instruction>
                     <h2>Integracja z Arduino</h2>
                     <ul className="list-group">
-                        <li className="list-group-item">Każda beczka (jej kranik) ma przypisany swój numer</li>
+                        <li className="list-group-item">Każdy kranik ma przypisany swój numer</li>
                         <li className="list-group-item">Przy każdym impulsie ze sterownika wyślij request pod następujący adres:</li>
-                        <li className="list-group-item">{API_URL}/barrels/TU_WSTAW_NUMER_BECZKI/hit</li>
+                        <li className="list-group-item">{API_URL}/barrelTaps/TU_WSTAW_NUMER_KRANIKU/hit</li>
                     </ul>
                 </Instruction>
 
                 <Instruction>
-                    <h2>Zarejestrowanie beczki w systemie</h2>
+                    <h2>Zarejestrowane kraniki w systemie</h2>
                     <ul className="list-group">
                         {barrels.length === 0 && <p>Brak beczek w systemie.</p>}
                         {barrels.map(barrel => (
-                            <li className="list-group-item list-group-item-success">{API_URL}/barrels/{barrel.id}/hit</li>
+                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hit</li>
                         ))}
                     </ul>
                 </Instruction>
