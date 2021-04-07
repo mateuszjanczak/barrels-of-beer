@@ -1,9 +1,11 @@
 export const routes = {
     homepage: '/',
-    barrels: '/barrels',
-    barrelsAdd: '/barrels/add',
-    barrelsSet: '/barrels/set',
-    barrelsSetId: '/barrels/set/:id',
+    barrels: '/barrelTaps',
+    barrelsAdd: '/barrelTaps/add',
+    barrelsSet: '/barrelTaps/set',
+    barrelsSetId: '/barrelTaps/set/:id',
+    barrelsHit: '/barrelTaps/hit',
+    barrelsHitId: '/barrelTaps/hit/:id',
     statistics: '/statistics',
     logs: '/logs',
     readme: '/readme'
