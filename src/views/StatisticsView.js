@@ -6,7 +6,7 @@ import {API_URL} from "../service/Api";
 export class StatisticsView extends React.Component {
 
     state = {
-        title: "Codzienne statystyki",
+        title: "Dzienne statystyki",
         statistics: [
 /*            {
                 date: "2021-04-05T00:26:34.321+00:00",

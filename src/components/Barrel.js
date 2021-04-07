@@ -3,13 +3,12 @@ import styled from "styled-components";
 import {routes} from "../routes/Routes";
 import {withRouter} from "react-router-dom";
 import {Component} from "react";
-import {API_URL} from "../service/Api";
 
 class Barrel extends Component {
 
     handleHit = (barrelTapId) => {
-        const { fetchBarrelsFn } = this.props;
-        fetch(API_URL + '/barrelTaps/' + barrelTapId + '/hit').then(() => fetchBarrelsFn());
+        const { history } = this.props;
+        history.push(`${routes.barrelsHit}/${barrelTapId}`);
     }
 
     handleSet = (barrelTapId) => {
@@ -38,7 +37,7 @@ class Barrel extends Component {
                 </Container>
 
                 <Nav>
-                    <button className="btn btn-primary" onClick={() => this.handleHit(barrelTapId)}>Impuls</button>
+                    <button className="btn btn-primary" onClick={() => this.handleHit(barrelTapId)}>Nowy stan</button>
                     <button className="btn btn-primary" onClick={() => this.handleSet(barrelTapId)}>Ustaw</button>
                 </Nav>
             </Wrapper>

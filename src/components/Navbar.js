@@ -12,9 +12,9 @@ const Navbar = () => (
                     <li className="nav-item">
                         <NavLink to={routes.barrels} className="nav-link active">Beczki</NavLink>
                     </li>
-                    <li className="nav-item">
+{/*                    <li className="nav-item">
                         <NavLink to={routes.statistics} className="nav-link active">Statystyki</NavLink>
-                    </li>
+                    </li>*/}
                     <li className="nav-item">
                         <NavLink to={routes.logs} className="nav-link active">Logi</NavLink>
                     </li>

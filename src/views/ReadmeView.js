@@ -60,7 +60,7 @@ export class ReadmeView extends React.Component {
                     <ul className="list-group">
                         <li className="list-group-item">Każdy kranik ma przypisany swój numer</li>
                         <li className="list-group-item">Przy każdym impulsie ze sterownika wyślij request pod następujący adres:</li>
-                        <li className="list-group-item">{API_URL}/barrelTaps/TU_WSTAW_NUMER_KRANIKU/hit</li>
+                        <li className="list-group-item">{API_URL}/barrelTaps/TU_WSTAW_NUMER_KRANIKU/hit/TU_WSTAW_NOWY_STAN_LICZNIKA</li>
                     </ul>
                 </Instruction>
 
@@ -69,7 +69,7 @@ export class ReadmeView extends React.Component {
                     <ul className="list-group">
                         {barrels.length === 0 && <p>Brak beczek w systemie.</p>}
                         {barrels.map(barrel => (
-                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hit</li>
+                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hit/NOWY_STAN_LICZNIKA</li>
                         ))}
                     </ul>
                 </Instruction>
