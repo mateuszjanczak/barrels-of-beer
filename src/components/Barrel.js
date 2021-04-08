@@ -18,7 +18,7 @@ class Barrel extends Component {
 
     render() {
         const { details } = this.props;
-        const { barrelTapId, barrelName, barrelContent, capacity, totalCapacity} = details;
+        const { barrelTapId, barrelName, barrelContent, capacity, totalCapacity, temperature} = details;
         const percent = (capacity / totalCapacity);
 
         return (
@@ -27,18 +27,23 @@ class Barrel extends Component {
                     <h3>Kranik {barrelTapId}</h3>
                     <h4>{barrelName}</h4>
                     <h4>{barrelContent}</h4>
-                    <h6>{capacity/1000} / {totalCapacity/1000} L</h6>
                 </Details>
 
                 <Container>
                     <GrayImg src={BarrelImg} alt={"Barrel"}/>
                     <ColorImg percent={percent} src={BarrelImg} alt={"Barrel"}/>
-                    <Status>{(percent * 100).toFixed(0)}%</Status>
+                    <Status>
+                        <p>{(percent * 100).toFixed(0)}%</p>
+                        <p>{temperature} °C</p>
+                        <p>{capacity/1000} / {totalCapacity/1000} L</p>
+                    </Status>
                 </Container>
 
                 <Nav>
+{/*
                     <button className="btn btn-primary" onClick={() => this.handleHit(barrelTapId)}>Nowy stan</button>
-                    <button className="btn btn-primary" onClick={() => this.handleSet(barrelTapId)}>Ustaw</button>
+*/}
+                    <button className="btn btn-primary" onClick={() => this.handleSet(barrelTapId)}>Ustaw beczkę</button>
                 </Nav>
             </Wrapper>
         );
@@ -92,8 +97,10 @@ const Status = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 200;
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 600;
+  text-align: center;
+  text-shadow: 2px 2px 8px #000000;
 `;
 
 export default withRouter(Barrel);

@@ -21,6 +21,10 @@ export class BarrelsView extends React.Component {
             .then(barrels  => this.setState({ barrels }));
     }
 
+    handleRefresh = () => {
+        this.fetchBarrels();
+    }
+
     render() {
         return (
             <Wrapper>
@@ -30,6 +34,7 @@ export class BarrelsView extends React.Component {
                     <Link to={routes.barrelsAdd}>
                         <button type="button" className="btn btn-light">Dodaj kranik</button>
                     </Link>
+                    <button type="button" className="btn btn-light" onClick={this.handleRefresh}>Odśwież</button>
                 </Nav>
 
                 <Items>
@@ -52,10 +57,13 @@ const Heading = styled.h1`
 const Nav = styled.div`
   text-align: center;
   margin: 2rem 0;
+  > * {
+    margin: 0 0.5rem;
+  }
 `;
 
 const Items = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
 `;
