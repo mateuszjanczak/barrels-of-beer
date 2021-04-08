@@ -68,7 +68,7 @@ class SetForm extends Component {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="capacity" className="form-label">Ilość piwa w [L]</label>
+                    <label htmlFor="capacity" className="form-label">Ilość piwa w [ml]</label>
                     <input type="number" className="form-control" id="capacity" name="capacity" value={capacity} onChange={this.handleChange}/>
                 </div>
                 <button className="btn btn-primary" onClick={() => this.handleFormSubmit(id)}>Ustaw</button>

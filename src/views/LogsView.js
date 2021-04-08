@@ -44,7 +44,7 @@ export class LogsView extends React.Component {
                                 <td>{barrelTapId}</td>
                                 <td>{barrelName}</td>
                                 <td>{barrelContent}</td>
-                                <td>{capacity} L</td>
+                                <td>{capacity/1000} L</td>
                                 <td>{date.substring(0, 19).replace('T', ' ')}</td>
                                 <td>{logType}</td>
                             </tr>

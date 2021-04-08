@@ -27,7 +27,7 @@ class Barrel extends Component {
                     <h3>Kranik {barrelTapId}</h3>
                     <h4>{barrelName}</h4>
                     <h4>{barrelContent}</h4>
-                    <h6>{capacity} / {totalCapacity} L</h6>
+                    <h6>{capacity/1000} / {totalCapacity/1000} L</h6>
                 </Details>
 
                 <Container>

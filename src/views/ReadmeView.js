@@ -50,7 +50,7 @@ export class ReadmeView extends React.Component {
                     <h2>Ustawianie beczki</h2>
                     <ul className="list-group">
                         <li className="list-group-item">1. Wybierz przycisk 'Ustaw' przy wybranym kraniku</li>
-                        <li className="list-group-item">2. W formularzu podaj kod beczki, zawartość beczki oraz pojemność beczki w litrach</li>
+                        <li className="list-group-item">2. W formularzu podaj kod beczki, zawartość beczki oraz pojemność beczki w mililitrach</li>
                         <li className="list-group-item">3. Wyślij formularz</li>
                     </ul>
                 </Instruction>
@@ -60,7 +60,7 @@ export class ReadmeView extends React.Component {
                     <ul className="list-group">
                         <li className="list-group-item">Każdy kranik ma przypisany swój numer</li>
                         <li className="list-group-item">Przy każdym impulsie ze sterownika wyślij request pod następujący adres:</li>
-                        <li className="list-group-item">{API_URL}/barrelTaps/TU_WSTAW_NUMER_KRANIKU/hit/TU_WSTAW_NOWY_STAN_LICZNIKA</li>
+                        <li className="list-group-item">{API_URL}/barrelTaps/TU_WSTAW_NUMER_KRANIKU/hit/TU_WSTAW_NOWY_STAN_LICZNIKA_W_ML</li>
                     </ul>
                 </Instruction>
 
@@ -69,7 +69,7 @@ export class ReadmeView extends React.Component {
                     <ul className="list-group">
                         {barrels.length === 0 && <p>Brak beczek w systemie.</p>}
                         {barrels.map(barrel => (
-                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hit/NOWY_STAN_LICZNIKA</li>
+                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hit/NOWY_STAN_LICZNIKA_W_ML</li>
                         ))}
                     </ul>
                 </Instruction>
