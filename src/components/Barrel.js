@@ -25,7 +25,9 @@ class Barrel extends Component {
             <Wrapper>
                 <Details>
                     <h3>Kranik {barrelTapId}</h3>
+{/*
                     <h4>{barrelName}</h4>
+*/}
                     <h4>{barrelContent}</h4>
                 </Details>
 
@@ -97,7 +99,7 @@ const Status = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 200;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   text-align: center;
   text-shadow: 2px 2px 8px #000000;
