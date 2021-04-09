@@ -63,8 +63,16 @@ class SetForm extends Component {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="beerType" className="form-label">Zawartość beczki</label>
-                    <input type="text" className="form-control" id="barrelContent" name="barrelContent" value={barrelContent} onChange={this.handleChange}/>
+                    <label htmlFor="barrelContent" className="form-label">Typ piwa</label>
+                    <select className="form-select" id="barrelContent" name="barrelContent" value={barrelContent} onChange={this.handleChange}>
+                        <option value="CHMYZ_Pils">CHMYZ Pils</option>
+                        <option value="GAZDA_Marcowe">GAZDA Marcowe</option>
+                        <option value="KRASA_Weizen">KRASA Weizen</option>
+                        <option value="UPIR_Dunkel">UPIR Dunkel</option>
+                        <option value="KICARZ_Koźlak">KICARZ Koźlak</option>
+                        <option value="KADUK_Podwójny_Koźlak">KADUK Podwójny Koźlak</option>
+                        <option value="SĘDEK_IPA">SĘDEK IPA</option>
+                    </select>
                 </div>
 
                 <div className="mb-3">

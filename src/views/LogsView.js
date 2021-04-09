@@ -13,6 +13,10 @@ export class LogsView extends React.Component {
         this.fetchLogs();
     }
 
+    handleRefresh = () => {
+        this.fetchLogs();
+    }
+
     fetchLogs = () => {
         fetch(API_URL + '/logs/barrelTaps')
             .then(data => data.json())
@@ -27,6 +31,10 @@ export class LogsView extends React.Component {
         return (
             <div>
                 <Heading>Logi</Heading>
+                <Nav>
+                    <button type="button" className="btn btn-light" onClick={this.handleRefresh}>Odśwież</button>
+                </Nav>
+
                 <h1>Licznik</h1>
                 {this.state.barrelTapLogs.length === 0 && <p className="text-center">Brak danych</p>}
                 <div className="bg-light">
@@ -39,18 +47,20 @@ export class LogsView extends React.Component {
                             <th scope="col">Kod beczki</th>
                             <th scope="col">Zawartość beczki</th>
                             <th scope="col">Stan</th>
+                            <th scope="col">Zużycie</th>
                             <th scope="col">Data</th>
                             <th scope="col">Typ operacji</th>
                         </tr>}
                         </thead>
                         <tbody>
-                        {this.state.barrelTapLogs.map(({id, barrelTapId, barrelName, barrelContent, capacity, date, logType}) => (
+                        {this.state.barrelTapLogs.map(({id, barrelTapId, barrelName, barrelContent, capacity, usage, date, logType}) => (
                             <tr key={id}>
                                 <th scope="row">{id}</th>
                                 <td>{barrelTapId}</td>
                                 <td>{barrelName}</td>
                                 <td>{barrelContent}</td>
                                 <td>{capacity/1000} L</td>
+                                <td>{usage/1000} L</td>
                                 <td>{date.substring(0, 19).replace('T', ' ')}</td>
                                 <td>{logType}</td>
                             </tr>
@@ -95,4 +105,12 @@ export class LogsView extends React.Component {
 const Heading = styled.h1`
   text-align: center;
   margin: 2rem 0;
+`;
+
+const Nav = styled.div`
+  text-align: center;
+  margin: 2rem 0;
+  > * {
+    margin: 0 0.5rem;
+  }
 `;
