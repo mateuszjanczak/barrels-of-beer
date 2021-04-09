@@ -19,7 +19,7 @@ class Barrel extends Component {
     render() {
         const { details } = this.props;
         const { barrelTapId, barrelName, barrelContent, capacity, totalCapacity, temperature} = details;
-        const percent = (capacity / totalCapacity);
+        const percent = isNaN(capacity / totalCapacity) ? 0 : capacity / totalCapacity;
 
         return (
             <Wrapper>
@@ -40,7 +40,7 @@ class Barrel extends Component {
                 </Container>
 
                 <Nav>
-{/*
+                    {/*
                     <button className="btn btn-primary" onClick={() => this.handleHit(barrelTapId)}>Nowy stan</button>
 */}
                     <button className="btn btn-primary" onClick={() => this.handleSet(barrelTapId)}>Ustaw beczkę</button>
