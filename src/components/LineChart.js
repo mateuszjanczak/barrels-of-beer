@@ -10,7 +10,7 @@ class LineChart extends React.Component {
 
     componentDidUpdate() {
         this.myChart.data.labels = [...this.props.data.map(item => item.barrelContent)];
-        this.myChart.data.datasets[0].data = [...this.props.data.map(item => item.count)];
+        this.myChart.data.datasets[0].data = [...this.props.data.map(item => item.count / 1000)];
         this.myChart.update();
     }
 
@@ -21,7 +21,7 @@ class LineChart extends React.Component {
             labels: labels,
             datasets: [{
                 label: 'L',
-                data: this.props.data.map(item => item.count),
+                data: this.props.data.map(item => item.count / 1000),
                 backgroundColor: "#efa75e",
                 borderWidth: 1
             }]
@@ -49,7 +49,7 @@ class LineChart extends React.Component {
                         },
                         ticks: {
                             beginAtZero: true,
-                            suggestedMax: 1.5 * Math.max(...this.props.data.map(item => parseInt(item.count))),
+                            suggestedMax: 1.5 * Math.max(...this.props.data.map(item => parseInt(item.count) / 1000)),
                             fontSize: 20
                         }
                     }]
