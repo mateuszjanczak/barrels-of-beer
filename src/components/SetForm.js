@@ -8,7 +8,7 @@ class SetForm extends Component {
     state = {
         id: "",
         barrelName: "",
-        barrelContent: "",
+        barrelContent: "CHMYZ_Pils",
         capacity: ""
     }
 
