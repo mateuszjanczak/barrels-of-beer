@@ -8,7 +8,7 @@ class SetForm extends Component {
     state = {
         id: "",
         barrelName: "",
-        barrelContent: "CHMYZ_Pils",
+        barrelContent: "",
         capacity: ""
     }
 
@@ -65,6 +65,7 @@ class SetForm extends Component {
                 <div className="mb-3">
                     <label htmlFor="barrelContent" className="form-label">Typ piwa</label>
                     <select className="form-select" id="barrelContent" name="barrelContent" value={barrelContent} onChange={this.handleChange}>
+                        <option defaultChecked>Wybierz z listy</option>
                         <option value="CHMYZ_Pils">CHMYZ Pils</option>
                         <option value="GAZDA_Marcowe">GAZDA Marcowe</option>
                         <option value="KRASA_Weizen">KRASA Weizen</option>
