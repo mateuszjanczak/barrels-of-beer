@@ -37,8 +37,8 @@ export class LogsView extends React.Component {
 
                 <h1>Zużycie</h1>
                 {this.state.barrelTapLogs.length === 0 && <p className="text-center">Brak danych</p>}
-                <Container className="bg-light table-responsive">
-                    <table className="table">
+                <Container className="table-responsive">
+                    <table className="bg-light table mb-0">
                         <thead>
                         {this.state.barrelTapLogs.length > 0 &&
                         <tr>
@@ -70,8 +70,8 @@ export class LogsView extends React.Component {
                 </Container>
                 <h1>Temperatura</h1>
                 {this.state.barrelTemperatureLogs.length === 0 && <p className="text-center">Brak danych</p>}
-                <Container className="bg-light table-responsive">
-                    <table className="table">
+                <Container className="table-responsive">
+                    <table className="table bg-light">
                         <thead>
                         {this.state.barrelTemperatureLogs.length > 0 &&
                         <tr>

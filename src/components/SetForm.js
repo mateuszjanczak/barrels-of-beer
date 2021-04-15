@@ -9,7 +9,7 @@ class SetForm extends Component {
         id: "",
         barrelName: "",
         barrelContent: "",
-        capacity: ""
+        totalCapacity: ""
     }
 
     componentDidMount() {
@@ -26,7 +26,7 @@ class SetForm extends Component {
     }
 
     handleFormSubmit = (barrelTapId) => {
-        const { barrelName, barrelContent, capacity } = this.state;
+        const { barrelName, barrelContent, totalCapacity } = this.state;
 
         fetch(API_URL + '/barrelTaps/' + barrelTapId + '/set', {
             headers: {
@@ -37,7 +37,7 @@ class SetForm extends Component {
             body: JSON.stringify({
                 barrelName,
                 barrelContent,
-                capacity
+                totalCapacity
             })
         }).then(() => this.props.history.push(routes.barrels))
     }
@@ -48,7 +48,7 @@ class SetForm extends Component {
 
     render() {
 
-        const {barrelName, barrelContent, capacity, id } = this.state;
+        const {barrelName, barrelContent, totalCapacity, id } = this.state;
 
         return (
             <div>
@@ -77,8 +77,8 @@ class SetForm extends Component {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="capacity" className="form-label">Ilość piwa w [ml]</label>
-                    <input type="number" className="form-control" id="capacity" name="capacity" value={capacity} onChange={this.handleChange}/>
+                    <label htmlFor="totalCapacity" className="form-label">Ilość piwa w [ml]</label>
+                    <input type="number" className="form-control" id="totalCapacity" name="totalCapacity" value={totalCapacity} onChange={this.handleChange}/>
                 </div>
                 <button className="btn btn-primary" onClick={() => this.handleFormSubmit(id)}>Ustaw</button>
             </div>

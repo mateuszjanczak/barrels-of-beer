@@ -6,12 +6,18 @@ import {Component} from "react";
 class Navbar extends Component {
 
     state = {
-        mode: false
+        visible: false
     }
 
     toggleNav = () => {
         this.setState({
             visible: !this.state.visible
+        })
+    }
+
+    offNav = () => {
+        this.setState({
+            visible: false
         })
     }
 
@@ -28,16 +34,16 @@ class Navbar extends Component {
                     <div className={`collapse navbar-collapse ${this.state.visible ? "show" : ""}`} id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <NavLink to={routes.barrels} className="nav-link active" onClick={this.toggleNav}>Beczki</NavLink>
+                                <NavLink to={routes.barrels} className="nav-link active" onClick={this.offNav}>Beczki</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={routes.statistics} className="nav-link active" onClick={this.toggleNav}>Statystyki</NavLink>
+                                <NavLink to={routes.statistics} className="nav-link active" onClick={this.offNav}>Statystyki</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={routes.logs} className="nav-link active" onClick={this.toggleNav}>Logi</NavLink>
+                                <NavLink to={routes.logs} className="nav-link active" onClick={this.offNav}>Logi</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={routes.readme} className="nav-link active fw-bold" onClick={this.toggleNav}>Instrukcja</NavLink>
+                                <NavLink to={routes.readme} className="nav-link active fw-bold" onClick={this.offNav}>Instrukcja</NavLink>
                             </li>
                         </ul>
                     </div>
