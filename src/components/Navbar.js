@@ -25,7 +25,7 @@ class Navbar extends Component {
         return (
             <Nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
-                    <NavLink  to={routes.barrels} className="navbar-brand" href="#">System obsługi browaru</NavLink>
+                    <NavLink  to={routes.homepage} className="navbar-brand" href="#">System obsługi browaru</NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation" onClick={this.toggleNav}>
