@@ -7,7 +7,7 @@ export class BarrelsFormSetView extends React.Component {
         const { id } = this.props.match.params;
 
         return (
-            <Wrapper>
+            <Wrapper className="container">
                 <SetForm id={id} />
             </Wrapper>
         )

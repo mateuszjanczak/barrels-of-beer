@@ -6,7 +6,7 @@ import {API_URL} from "../service/Api";
 export class StatisticsView extends React.Component {
 
     state = {
-        title: "Dzienne statystyki",
+        title: "Całkowite statystyki",
         statistics: [
 /*            {
                 date: "2021-04-05T00:26:34.321+00:00",
@@ -55,7 +55,7 @@ export class StatisticsView extends React.Component {
     render() {
         const { title, statistics } = this.state;
         return (
-            <div>
+            <div className="container">
                 <Heading>{title}</Heading>
                 {statistics.length === 0 && <p className="text-center">Brak danych</p>}
                 {statistics.length > 0 &&

@@ -3,6 +3,12 @@ import styled from "styled-components";
 import {routes} from "../routes/Routes";
 import {withRouter} from "react-router-dom";
 import {Component} from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faBeer,
+    faDatabase,
+    faThermometerHalf
+} from '@fortawesome/free-solid-svg-icons'
 
 class Barrel extends Component {
 
@@ -18,7 +24,7 @@ class Barrel extends Component {
 
     render() {
         const { details } = this.props;
-        const { barrelTapId, barrelName, barrelContent, capacity, totalCapacity, temperature} = details;
+        const { barrelTapId, barrelContent, capacity, totalCapacity, temperature} = details;
         const percent = isNaN(capacity / totalCapacity) ? 0 : capacity / totalCapacity;
 
         return (
@@ -35,9 +41,9 @@ class Barrel extends Component {
                     <GrayImg src={BarrelImg} alt={"Barrel"}/>
                     <ColorImg percent={percent} src={BarrelImg} alt={"Barrel"}/>
                     <Status>
-                        <p>{(percent * 100).toFixed(0)}%</p>
-                        <p>{temperature} °C</p>
-                        <p>{capacity/1000} / {totalCapacity/1000} L</p>
+                        <p><FontAwesomeIcon icon={faThermometerHalf} /> {temperature} °C</p>
+                        <p><FontAwesomeIcon icon={faBeer} /> {(totalCapacity - capacity)/1000} L</p>
+                        <p><FontAwesomeIcon icon={faDatabase} /> {capacity/1000} / {totalCapacity/1000} L</p>
                     </Status>
                 </Container>
 

@@ -19,7 +19,7 @@ const App = () => (
     <Router>
         <GlobalStyle />
         <Navbar />
-        <Container className={["container", "mt-5", "text-white"]}>
+        <Container className={["container-fluid", "mt-5", "text-white"]}>
             <Switch>
                 <Route exact path={routes.homepage} component={BarrelsView} />
                 <Route exact path={routes.barrels} component={BarrelsView} />

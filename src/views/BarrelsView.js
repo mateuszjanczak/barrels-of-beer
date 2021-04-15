@@ -27,7 +27,7 @@ export class BarrelsView extends React.Component {
 
     render() {
         return (
-            <Wrapper>
+            <Wrapper className="container">
                 <Heading>Beczki z piwem</Heading>
 
                 <Nav>
@@ -64,6 +64,19 @@ const Nav = styled.div`
 
 const Items = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+
+  @media screen and (min-width: 810px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media screen and (min-width: 1050px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: 1290px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  //grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
 `;

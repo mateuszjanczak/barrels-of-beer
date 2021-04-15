@@ -26,7 +26,7 @@ export class ReadmeView extends React.Component {
     render() {
         const { barrels } = this.state;
         return (
-            <div>
+            <div className="container">
                 <Heading>Instrukcja</Heading>
 
                 <div className="alert alert-danger" role="alert">
@@ -60,7 +60,7 @@ export class ReadmeView extends React.Component {
                     <ul className="list-group">
                         <li className="list-group-item">Każdy kranik ma przypisany swój numer</li>
                         <li className="list-group-item">Przy każdym impulsie ze sterownika wyślij request pod następujący adres:</li>
-                        <li className="list-group-item">{API_URL}/barrelTaps/TU_WSTAW_NUMER_KRANIKU/hit/TU_WSTAW_DANE_HEX</li>
+                        <li className="list-group-item">{API_URL}/barrelTaps/NUMER_KRANIKU/hit/DANE_HEX</li>
                         <li className="list-group-item">Przykład: {API_URL}/barrelTaps/1/hit/3F23 D70A 0000 025C</li>
                     </ul>
                 </Instruction>
@@ -70,7 +70,7 @@ export class ReadmeView extends React.Component {
                     <ul className="list-group">
                         {barrels.length === 0 && <p>Brak beczek w systemie.</p>}
                         {barrels.map(barrel => (
-                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hit/TU_WSTAW_DANE_HEX</li>
+                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hit/DANE_HEX</li>
                         ))}
                     </ul>
                 </Instruction>

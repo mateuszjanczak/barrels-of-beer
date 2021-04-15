@@ -29,15 +29,15 @@ export class LogsView extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <Heading>Logi</Heading>
                 <Nav>
                     <button type="button" className="btn btn-light" onClick={this.handleRefresh}>Odśwież</button>
                 </Nav>
 
-                <h1>Licznik</h1>
+                <h1>Zużycie</h1>
                 {this.state.barrelTapLogs.length === 0 && <p className="text-center">Brak danych</p>}
-                <div className="bg-light">
+                <Container className="bg-light table-responsive">
                     <table className="table">
                         <thead>
                         {this.state.barrelTapLogs.length > 0 &&
@@ -67,10 +67,10 @@ export class LogsView extends React.Component {
                         ))}
                         </tbody>
                     </table>
-                </div>
+                </Container>
                 <h1>Temperatura</h1>
                 {this.state.barrelTemperatureLogs.length === 0 && <p className="text-center">Brak danych</p>}
-                <div className="bg-light">
+                <Container className="bg-light table-responsive">
                     <table className="table">
                         <thead>
                         {this.state.barrelTemperatureLogs.length > 0 &&
@@ -96,7 +96,7 @@ export class LogsView extends React.Component {
                         ))}
                         </tbody>
                     </table>
-                </div>
+                </Container>
             </div>
         )
     }
@@ -105,6 +105,10 @@ export class LogsView extends React.Component {
 const Heading = styled.h1`
   text-align: center;
   margin: 2rem 0;
+`;
+
+const Container = styled.div`
+  margin-bottom: 2rem;
 `;
 
 const Nav = styled.div`

@@ -5,7 +5,7 @@ import AddForm from "../components/AddForm";
 export class BarrelsFormAddView extends React.Component {
     render() {
         return (
-            <Wrapper>
+            <Wrapper className="container">
                 <AddForm />
             </Wrapper>
         )

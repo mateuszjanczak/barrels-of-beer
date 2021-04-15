@@ -5,6 +5,10 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
     
+    * {
+      word-wrap: break-word;
+    }
+    
     body {
         margin: 0;
         padding: 0;

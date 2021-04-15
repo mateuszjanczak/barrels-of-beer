@@ -7,7 +7,7 @@ export class BarrelsFormHitView extends React.Component {
         const { id } = this.props.match.params;
 
         return (
-            <Wrapper>
+            <Wrapper className="container">
                 <HitForm id={id} />
             </Wrapper>
         )
