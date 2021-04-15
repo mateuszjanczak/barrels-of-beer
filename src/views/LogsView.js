@@ -1,12 +1,19 @@
 import * as React from "react";
 import styled from "styled-components";
 import {API_URL} from "../service/Api";
+import {Pagination} from "@material-ui/lab";
 
 export class LogsView extends React.Component {
 
     state = {
-        barrelTapLogs: [],
-        barrelTemperatureLogs: []
+        barrelTapLogs: {
+            content: [],
+            totalPages: 0
+        },
+        barrelTemperatureLogs: {
+            content: [],
+            totalPages: 0
+        }
     }
 
     componentDidMount() {
@@ -17,30 +24,44 @@ export class LogsView extends React.Component {
         this.fetchLogs();
     }
 
+    handleChangePageTapLogs = (event, value) => {
+        this.fetchBarrelTapLogs(value - 1);
+    }
+
+    handleChangePageTemperatureLogs = (event, value) => {
+        this.fetchBarrelTemperatureLogs(value - 1);
+    }
+
     fetchLogs = () => {
-        fetch(API_URL + '/logs/barrelTaps')
+        this.fetchBarrelTapLogs(0);
+        this.fetchBarrelTemperatureLogs(0);
+    }
+
+    fetchBarrelTapLogs = (page) => {
+        fetch(API_URL + '/logs/barrelTaps/' + page)
             .then(data => data.json())
             .then(barrelTapLogs  => this.setState({ barrelTapLogs }));
+    }
 
-        fetch(API_URL + '/logs/barrelTemperature')
+    fetchBarrelTemperatureLogs = (page) => {
+        fetch(API_URL + '/logs/barrelTemperature/' + page)
             .then(data => data.json())
             .then(barrelTemperatureLogs  => this.setState({ barrelTemperatureLogs }));
     }
 
     render() {
+        const { barrelTapLogs, barrelTemperatureLogs } = this.state;
+
         return (
             <div className="container-fluid">
                 <Heading>Logi</Heading>
-                <Nav>
-                    <button type="button" className="btn btn-light" onClick={this.handleRefresh}>Odśwież</button>
-                </Nav>
 
-                <h1>Zużycie</h1>
-                {this.state.barrelTapLogs.length === 0 && <p className="text-center">Brak danych</p>}
-                <Container className="table-responsive">
-                    <table className="bg-light table mb-0">
+                <h3>Zużycie</h3>
+                {barrelTapLogs.content.length === 0 && <p className="text-center">Brak danych</p>}
+                <Container className="table-responsive bg-light">
+                    <table className="table mb-0">
                         <thead>
-                        {this.state.barrelTapLogs.length > 0 &&
+                        {barrelTapLogs.content.length > 0 &&
                         <tr>
                             <th scope="col">Identyfikator operacji</th>
                             <th scope="col">Numer kraniku</th>
@@ -53,7 +74,7 @@ export class LogsView extends React.Component {
                         </tr>}
                         </thead>
                         <tbody>
-                        {this.state.barrelTapLogs.map(({id, barrelTapId, barrelName, barrelContent, capacity, usage, date, logType}) => (
+                        {barrelTapLogs.content.map(({id, barrelTapId, barrelName, barrelContent, capacity, usage, date, logType}) => (
                             <tr key={id}>
                                 <th scope="row">{id}</th>
                                 <td>{barrelTapId}</td>
@@ -67,13 +88,16 @@ export class LogsView extends React.Component {
                         ))}
                         </tbody>
                     </table>
+                    {barrelTapLogs.content.length > 0 && <PaginationContainer>
+                        <Pagination count={barrelTapLogs.totalPages} color="primary" onChange={this.handleChangePageTapLogs}/>
+                    </PaginationContainer>}
                 </Container>
-                <h1>Temperatura</h1>
-                {this.state.barrelTemperatureLogs.length === 0 && <p className="text-center">Brak danych</p>}
-                <Container className="table-responsive">
-                    <table className="table bg-light">
+                <h3>Temperatura</h3>
+                {barrelTemperatureLogs.content.length === 0 && <p className="text-center">Brak danych</p>}
+                <Container className="table-responsive bg-light">
+                    <table className="table mb-0">
                         <thead>
-                        {this.state.barrelTemperatureLogs.length > 0 &&
+                        {barrelTemperatureLogs.content.length > 0 &&
                         <tr>
                             <th scope="col">Identyfikator operacji</th>
                             <th scope="col">Numer kraniku</th>
@@ -84,7 +108,7 @@ export class LogsView extends React.Component {
                         </tr>}
                         </thead>
                         <tbody>
-                        {this.state.barrelTemperatureLogs.map(({id, barrelTapId, barrelName, barrelContent, temperature, date}) => (
+                        {barrelTemperatureLogs.content.map(({id, barrelTapId, barrelName, barrelContent, temperature, date}) => (
                             <tr key={id}>
                                 <th scope="row">{id}</th>
                                 <td>{barrelTapId}</td>
@@ -96,6 +120,9 @@ export class LogsView extends React.Component {
                         ))}
                         </tbody>
                     </table>
+                    {barrelTemperatureLogs.content.length > 0 && <PaginationContainer>
+                        <Pagination count={barrelTemperatureLogs.totalPages} color="primary" onChange={this.handleChangePageTemperatureLogs}/>
+                    </PaginationContainer>}
                 </Container>
             </div>
         )
@@ -111,10 +138,9 @@ const Container = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Nav = styled.div`
-  text-align: center;
-  margin: 2rem 0;
-  > * {
-    margin: 0 0.5rem;
-  }
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 `;
