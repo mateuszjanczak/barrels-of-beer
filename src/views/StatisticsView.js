@@ -47,7 +47,7 @@ export class StatisticsView extends React.Component {
     }
 
     fetchDailyStatistics = () => {
-        fetch(API_URL + '/statistics/daily')
+        fetch(API_URL + '/statistics/all')
             .then(data => data.json())
             .then(statistics => this.setState({ statistics }))
     }
