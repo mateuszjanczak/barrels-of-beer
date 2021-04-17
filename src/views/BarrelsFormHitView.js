@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import HitForm from "../components/HitForm";
+import HitForm from "../components/barrelshit/HitForm";
 
 export class BarrelsFormHitView extends React.Component {
     render() {

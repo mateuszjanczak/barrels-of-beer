@@ -1,7 +1,7 @@
 import {Component} from "react";
 import { withRouter } from "react-router-dom";
-import {routes} from "../routes/Routes";
-import {API_URL} from "../service/Api";
+import {routes} from "../../routes/Routes";
+import {API_URL} from "../../service/Api";
 
 class AddForm extends Component {
 

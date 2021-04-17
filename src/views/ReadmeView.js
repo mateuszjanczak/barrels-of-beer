@@ -56,7 +56,7 @@ export class ReadmeView extends React.Component {
                 </Instruction>
 
                 <Instruction>
-                    <h2>Integracja z Arduino</h2>
+                    <h2><s>Integracja z Arduino</s></h2>
                     <ul className="list-group">
                         <li className="list-group-item">Każdy kranik ma przypisany swój numer</li>
                         <li className="list-group-item">Przy każdym impulsie ze sterownika wyślij request pod następujący adres:</li>

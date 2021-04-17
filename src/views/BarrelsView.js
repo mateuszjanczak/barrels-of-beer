@@ -1,5 +1,5 @@
 import * as React from "react";
-import Barrel from "../components/Barrel";
+import Barrel from "../components/barrels/Barrel";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {routes} from "../routes/Routes";

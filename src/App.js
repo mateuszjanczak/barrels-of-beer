@@ -14,6 +14,7 @@ import {BarrelsFormAddView} from "./views/BarrelsFormAddView";
 import {BarrelsFormSetView} from "./views/BarrelsFormSetView";
 import {LogsView} from "./views/LogsView";
 import {ReadmeView} from "./views/ReadmeView";
+import {ExtendedStatisticsView} from "./views/ExtendedStatisticsView";
 
 const App = () => (
     <Router>
@@ -24,6 +25,7 @@ const App = () => (
                 <Route exact path={routes.homepage} component={BarrelsView} />
                 <Route exact path={routes.barrels} component={BarrelsView} />
                 <Route exact path={routes.statistics} component={StatisticsView} />
+                <Route exact path={routes.extendedStatistics} component={ExtendedStatisticsView} />
                 <Route exact path={routes.barrelsAdd} component={BarrelsFormAddView} />
                 <Route exact path={routes.logs} component={LogsView} />
                 <Route exact path={routes.readme} component={ReadmeView} />

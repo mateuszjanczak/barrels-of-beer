@@ -40,6 +40,9 @@ class Navbar extends Component {
                                 <NavLink to={routes.statistics} className="nav-link active" onClick={this.offNav}>Statystyki</NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink to={routes.extendedStatistics} className="nav-link active" onClick={this.offNav}>Statystyki 2</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink to={routes.logs} className="nav-link active" onClick={this.offNav}>Logi</NavLink>
                             </li>
                             <li className="nav-item">

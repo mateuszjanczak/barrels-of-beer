@@ -68,20 +68,20 @@ export class LogsView extends React.Component {
                             <th scope="col">Kod beczki</th>
                             <th scope="col">Zawartość beczki</th>
                             <th scope="col">Stan</th>
-                            <th scope="col">[Stan - Zużycie]</th>
+                            <th scope="col">Ogólne zużycie</th>
                             <th scope="col">Zużycie</th>
                             <th scope="col">Data</th>
                             <th scope="col">Typ operacji</th>
                         </tr>}
                         </thead>
                         <tbody>
-                        {barrelTapLogs.content.map(({id, barrelTapId, barrelName, barrelContent, capacity, totalUsage, singleUsage, date, logType}) => (
+                        {barrelTapLogs.content.map(({id, barrelTapId, barrelName, barrelContent, currentLevel, totalUsage, singleUsage, date, logType}) => (
                             <tr key={id}>
                                 <th scope="row">{id}</th>
                                 <td>{barrelTapId}</td>
                                 <td>{barrelName}</td>
                                 <td>{barrelContent}</td>
-                                <td>{capacity/1000} L</td>
+                                <td>{currentLevel/1000} L</td>
                                 <td>{totalUsage/1000} L</td>
                                 <td>{singleUsage/1000} L</td>
                                 <td>{date.substring(0, 19).replace('T', ' ')}</td>

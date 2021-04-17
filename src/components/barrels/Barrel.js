@@ -1,6 +1,6 @@
-import BarrelImg from './../assets/barrel.png';
+import BarrelImg from '../../assets/barrel.png';
 import styled from "styled-components";
-import {routes} from "../routes/Routes";
+import {routes} from "../../routes/Routes";
 import {withRouter} from "react-router-dom";
 import {Component} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,8 +24,8 @@ class Barrel extends Component {
 
     render() {
         const { details } = this.props;
-        const { barrelTapId, barrelContent, capacity, totalCapacity, temperature} = details;
-        const percent = isNaN(capacity / totalCapacity) ? 0 : capacity / totalCapacity;
+        const { barrelTapId, barrelContent, currentLevel, capacity, temperature} = details;
+        const percent = isNaN(currentLevel / capacity) ? 0 : currentLevel / capacity;
 
         return (
             <Wrapper>
@@ -42,8 +42,8 @@ class Barrel extends Component {
                     <ColorImg percent={percent} src={BarrelImg} alt={"Barrel"}/>
                     <Status>
                         <p><FontAwesomeIcon icon={faThermometerHalf} /> {temperature} °C</p>
-                        <p><FontAwesomeIcon icon={faBeer} /> {(totalCapacity - capacity)/1000} L</p>
-                        <p><FontAwesomeIcon icon={faDatabase} /> {capacity/1000} / {totalCapacity/1000} L</p>
+                        <p><FontAwesomeIcon icon={faBeer} /> {(capacity - currentLevel)/1000} L</p>
+                        <p><FontAwesomeIcon icon={faDatabase} /> {currentLevel/1000} / {capacity/1000} L</p>
                     </Status>
                 </Container>
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import LineChart from "../components/LineChart";
+import LineChart from "../components/statistics/LineChart";
 import {API_URL} from "../service/Api";
 
 export class StatisticsView extends React.Component {
@@ -59,7 +59,7 @@ export class StatisticsView extends React.Component {
                 <Heading>{title}</Heading>
                 {statistics.length === 0 && <p className="text-center">Brak danych</p>}
                 {statistics.length > 0 &&
-                    <div className="bg-light p-5">
+                    <div className="container bg-light py-3">
                         <LineChart data={statistics} title={title} />
                     </div>
                 }

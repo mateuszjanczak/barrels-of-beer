@@ -1,7 +1,7 @@
 import {Component} from "react";
-import {routes} from "../routes/Routes";
+import {routes} from "../../routes/Routes";
 import {withRouter} from "react-router-dom";
-import {API_URL} from "../service/Api";
+import {API_URL} from "../../service/Api";
 
 class HitForm extends Component {
 
