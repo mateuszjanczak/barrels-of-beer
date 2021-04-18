@@ -42,6 +42,10 @@ export class ReadmeView extends React.Component {
                     Uwaga! Pracujesz w środowisku testowym.
                 </div>}
 
+                <div className="alert alert-primary" role="alert">
+                    Front-end: React, Back-end: Java + Spring Boot, Baza danych: MongoDB
+                </div>
+
                 <Instruction>
                     <h2>Tworzenie kraników</h2>
                     <ul className="list-group">

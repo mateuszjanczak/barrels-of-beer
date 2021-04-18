@@ -89,9 +89,9 @@ export class LogsView extends React.Component {
                         <Pagination count={barrelTapLogs.totalPages} color="primary" onChange={this.handleChangePageTapLogs}/>
                     </PaginationContainer>}
                 </Container>
-                <Nav>
+                {barrelTapLogs.content.length > 0 && <Nav>
                     <a className="btn btn-light" href={API_URL + "/logs/barrelTaps/csv"} role="button">Eksportuj dane</a>
-                </Nav>
+                </Nav>}
 
                 <h3>Temperatura</h3>
                 {barrelTemperatureLogs.content.length === 0 && <p className="text-center">Brak danych</p>}
