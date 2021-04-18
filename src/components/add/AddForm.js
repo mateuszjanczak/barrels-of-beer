@@ -31,10 +31,6 @@ class AddForm extends Component {
                     <label htmlFor="id" className="form-label">Numer kraniku</label>
                     <input type="number" className="form-control" id="barrelTapId" name="barrelTapId" value={this.state.barrelTapId} onChange={this.handleChange}/>
                 </div>
-{/*                <div className="mb-3">
-                    <label htmlFor="capacity" className="form-label">Typ mieszanki</label>
-                    <input type="number" className="form-control" id="totalCapacity" name="totalCapacity" value={this.state.totalCapacity} onChange={this.handleChange}/>
-                </div>*/}
                 <button className="btn btn-primary" onClick={this.handleFormSubmit}>Dodaj kranik</button>
             </div>
         );

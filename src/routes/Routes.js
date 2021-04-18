@@ -6,8 +6,8 @@ export const routes = {
     barrelsSetId: '/barrelTaps/set/:id',
     barrelsHit: '/barrelTaps/hit',
     barrelsHitId: '/barrelTaps/hit/:id',
+    ranking: '/ranking',
     statistics: '/statistics',
-    extendedStatistics: '/extendedStatistics',
     logs: '/logs',
     readme: '/readme'
 }

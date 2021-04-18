@@ -1,6 +1,6 @@
-import BarrelImg from '../../assets/barrel.png';
+import BarrelImg from '../assets/barrel.png';
 import styled from "styled-components";
-import {routes} from "../../routes/Routes";
+import {routes} from "../routes/Routes";
 import {withRouter} from "react-router-dom";
 import {Component} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

@@ -1,55 +1,33 @@
 import * as React from "react";
 import styled from "styled-components";
-import LineChart from "../components/statistics/LineChart";
 import {API_URL} from "../service/Api";
+import StatisticsChart from "../components/statistics/StatisticsChart";
 
 export class StatisticsView extends React.Component {
 
     state = {
-        title: "Całkowite statystyki",
-        statistics: [
-/*            {
-                date: "2021-04-05T00:26:34.321+00:00",
-                barrelName: "Beczka #1",
-                beerType: "Tyskie",
-                count: 10
-            },
-            {
-                date: "2021-04-05T00:26:34.321+00:00",
-                barrelName: "Beczka #2",
-                beerType: "Harnaś",
-                count: 8
-            },
-            {
-                date: "2021-04-05T00:26:34.321+00:00",
-                barrelName: "Beczka #3",
-                beerType: "Kustosz",
-                count: 5
-            },
-            {
-                date: "2021-04-05T00:26:34.321+00:00",
-                barrelName: "Beczka #4",
-                beerType: "Książ czarny",
-                count: 5
-            },
-            {
-                date: "2021-04-05T00:26:34.321+00:00",
-                barrelName: "Beczka #4",
-                beerType: "Piwo ekipy",
-                count: 5
-            }*/
-        ]
+        title: "Statystyki",
+        statistics: [],
+        from: "",
+        to: "",
+        interval: 0
     }
 
-
-    componentDidMount() {
-        this.fetchDailyStatistics();
-    }
-
-    fetchDailyStatistics = () => {
-        fetch(API_URL + '/statistics/all')
+    fetchStatistics = (from, to, interval) => {
+        fetch(API_URL + `/statistics/from/${from}/to/${to}/interval/${interval}`)
             .then(data => data.json())
-            .then(statistics => this.setState({ statistics }))
+            .then(statistics => this.setState({ statistics }));
+    }
+
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
+    handleClick = () => {
+        let { from, to, interval } = this.state;
+        from = from.replace('T', ' ');
+        to = to.replace('T', ' ');
+        this.fetchStatistics(from, to, interval);
     }
 
     render() {
@@ -57,12 +35,32 @@ export class StatisticsView extends React.Component {
         return (
             <div className="container">
                 <Heading>{title}</Heading>
-                {statistics.length === 0 && <p className="text-center">Brak danych</p>}
-                {statistics.length > 0 &&
-                    <div className="container bg-light py-3">
-                        <LineChart data={statistics} title={title} />
+
+                <div className="container bg-light text-dark py-3 mb-5">
+                    <div className="mb-3">
+                        <label htmlFor="from" className="form-label">Data początkowa</label>
+                        <input type="datetime-local" className="form-control" id="from" name="from" onChange={this.handleChange}/>
                     </div>
-                }
+
+                    <div className="mb-3">
+                        <label htmlFor="to" className="form-label">Data końcowa</label>
+                        <input type="datetime-local" className="form-control" id="to" name="to" onChange={this.handleChange}/>
+                    </div>
+
+                    <div className="mb-3">
+                        <label htmlFor="counter" className="form-label">Interwał w minutach</label>
+                        <input type="number" className="form-control" id="interval" name="interval" onChange={this.handleChange}/>
+                    </div>
+
+                    <button className="btn btn-primary" onClick={this.handleClick}>Ustaw</button>
+                </div>
+
+                {statistics.map((item) => (
+                    <div className="container bg-light text-dark py-3 mb-5">
+                        <h3>{item.name}</h3>
+                        <StatisticsChart data={item} title={item.name} />
+                    </div>
+                ))}
             </div>
         )
     }

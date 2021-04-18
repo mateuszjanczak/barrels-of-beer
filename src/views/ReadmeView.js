@@ -18,9 +18,17 @@ export class ReadmeView extends React.Component {
             .then(barrels  => this.setState({ barrels }));
     }
 
-    handleReset = () => {
+    handleResetDatabase = () => {
         const c = window.confirm("Czy na pewno chcesz usunąć całą zawartość bazy danych?");
-        if(c) fetch(API_URL + '/reset-db');
+        if(c) fetch(API_URL + '/admin/reset-db');
+    }
+
+    handleEnableTaps = () => {
+        fetch(API_URL + '/admin/enable-taps');
+    }
+
+    handleDisableTaps = () => {
+        fetch(API_URL + '/admin/disable-taps');
     }
 
     render() {
@@ -56,12 +64,12 @@ export class ReadmeView extends React.Component {
                 </Instruction>
 
                 <Instruction>
-                    <h2><s>Integracja z Arduino</s></h2>
+                    <h2>Integracja z Node-RED</h2>
                     <ul className="list-group">
                         <li className="list-group-item">Każdy kranik ma przypisany swój numer</li>
                         <li className="list-group-item">Przy każdym impulsie ze sterownika wyślij request pod następujący adres:</li>
-                        <li className="list-group-item">{API_URL}/barrelTaps/NUMER_KRANIKU/hit/DANE_HEX</li>
-                        <li className="list-group-item">Przykład: {API_URL}/barrelTaps/1/hit/3F23 D70A 0000 025C</li>
+                        <li className="list-group-item">{API_URL}/barrelTaps/NUMER_KRANIKU/hex/DANE_HEX</li>
+                        <li className="list-group-item">Przykład: {API_URL}/barrelTaps/1/hex/3F23 D70A 0000 025C</li>
                     </ul>
                 </Instruction>
 
@@ -70,14 +78,21 @@ export class ReadmeView extends React.Component {
                     <ul className="list-group">
                         {barrels.length === 0 && <p>Brak beczek w systemie.</p>}
                         {barrels.map(barrel => (
-                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hit/DANE_HEX</li>
+                            <li className="list-group-item list-group-item-success">{API_URL}/barrelTaps/{barrel.barrelTapId}/hex/DANE_HEX</li>
                         ))}
                     </ul>
                 </Instruction>
 
                 <Instruction>
-                    <h2>Usuwanie zawartości bazy danych</h2>
-                    <button type="button" className="btn btn-danger" onClick={this.handleReset}>Reset serwera</button>
+                    <h2>Komunikacja ze sterownikiem</h2>
+                    <Button type="button" className="btn btn-success" onClick={this.handleEnableTaps}>Aktywuj kraniki</Button>
+                    <Button type="button" className="btn btn-primary" onClick={this.handleEnableTaps}>Odśwież kraniki</Button>
+                    <Button type="button" className="btn btn-danger" onClick={this.handleDisableTaps}>Dezaktywuj kraniki</Button>
+                </Instruction>
+
+                <Instruction>
+                    <h2>Baza danych</h2>
+                    <Button type="button" className="btn btn-danger" onClick={this.handleResetDatabase}>Wyczyść bazę danych</Button>
                 </Instruction>
             </div>
         )
@@ -94,4 +109,8 @@ const Instruction = styled.div`
   > h2 {
     margin-bottom: 1rem;
   }
+`;
+
+const Button = styled.button`
+  margin-right: 0.5rem;
 `;

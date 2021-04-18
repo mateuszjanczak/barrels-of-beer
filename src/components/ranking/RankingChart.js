@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "chart.js";
 
-class ExtendedLineChart extends React.Component {
+class RankingChart extends React.Component {
 
     constructor(props) {
         super(props);
@@ -9,19 +9,19 @@ class ExtendedLineChart extends React.Component {
     }
 
     componentDidUpdate() {
-        this.myChart.data.labels = [...this.props.data.dates.map(item => item.date)];
-        this.myChart.data.datasets[0].data = [...this.props.data.dates.map(item => item.count / 1000)];
+        this.myChart.data.labels = [...this.props.data.map(item => item.barrelContent)];
+        this.myChart.data.datasets[0].data = [...this.props.data.map(item => item.count / 1000)];
         this.myChart.update();
     }
 
     componentDidMount() {
-        const labels = [...this.props.data.dates.map(item => item.date)];
+        const labels = [...this.props.data.map(item => item.barrelContent)];
 
         const data = {
             labels: labels,
             datasets: [{
                 label: 'L',
-                data: this.props.data.dates.map(item => item.count / 1000),
+                data: this.props.data.map(item => item.count / 1000),
                 backgroundColor: "#efa75e",
                 borderWidth: 1
             }]
@@ -35,7 +35,7 @@ class ExtendedLineChart extends React.Component {
                 scales: {
                     xAxes: [{
                         ticks: {
-                            display: false
+                            display: true
                         },
                         gridLines: {
                             display: true,
@@ -49,8 +49,7 @@ class ExtendedLineChart extends React.Component {
                         },
                         ticks: {
                             beginAtZero: true,
-                            suggestedMax: 1.5 * Math.max(...this.props.data.dates.map(item => parseInt(item.count) / 1000)),
-                            fontSize: 20
+                            suggestedMax: 1.5 * Math.max(...this.props.data.map(item => parseInt(item.count) / 1000))
                         }
                     }]
                 }
@@ -64,4 +63,4 @@ class ExtendedLineChart extends React.Component {
     }
 }
 
-export default ExtendedLineChart;
+export default RankingChart;

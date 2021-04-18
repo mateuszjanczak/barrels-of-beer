@@ -7,9 +7,8 @@ class HitForm extends Component {
 
     state = {
         id: "",
-        barrelName: "",
-        barrelContent: "",
-        capacity: ""
+        currentLevel: "",
+        temperature: ""
     }
 
     componentDidMount() {
@@ -20,9 +19,8 @@ class HitForm extends Component {
     }
 
     handleFormSubmit = (barrelTapId) => {
-        const { counter } = this.state;
-
-        fetch(API_URL + '/barrelTaps/' + barrelTapId + '/hit/' + counter).then(() => this.props.history.push(routes.barrels))
+        const { currentLevel, temperature } = this.state;
+        fetch(API_URL + '/barrelTaps/' + barrelTapId + '/hit/currentLevel/' + currentLevel + '/temperature/' + temperature).then(() => this.props.history.push(routes.barrels))
     }
 
     handleChange = (e) => {
@@ -31,7 +29,7 @@ class HitForm extends Component {
 
     render() {
 
-        const { counter, id } = this.state;
+        const { currentLevel, temperature, id } = this.state;
 
         return (
             <div>
@@ -42,7 +40,12 @@ class HitForm extends Component {
 
                 <div className="mb-3">
                     <label htmlFor="counter" className="form-label">Nowy stan licznika</label>
-                    <input type="number" className="form-control" id="counter" name="counter" value={counter} onChange={this.handleChange}/>
+                    <input type="number" className="form-control" id="currentLevel" name="currentLevel" value={currentLevel} onChange={this.handleChange}/>
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="temperature" className="form-label">Nowy stan temperatury</label>
+                    <input type="number" className="form-control" id="temperature" name="temperature" value={temperature} onChange={this.handleChange}/>
                 </div>
 
                 <button className="btn btn-primary" onClick={() => this.handleFormSubmit(id)}>Ustaw</button>

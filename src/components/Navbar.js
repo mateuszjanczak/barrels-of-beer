@@ -37,10 +37,10 @@ class Navbar extends Component {
                                 <NavLink to={routes.barrels} className="nav-link active" onClick={this.offNav}>Beczki</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={routes.statistics} className="nav-link active" onClick={this.offNav}>Statystyki</NavLink>
+                                <NavLink to={routes.ranking} className="nav-link active" onClick={this.offNav}>Ranking</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={routes.extendedStatistics} className="nav-link active" onClick={this.offNav}>Statystyki 2</NavLink>
+                                <NavLink to={routes.statistics} className="nav-link active" onClick={this.offNav}>Statystyki</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink to={routes.logs} className="nav-link active" onClick={this.offNav}>Logi</NavLink>

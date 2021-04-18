@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import SetForm from "../components/barrelsset/SetForm";
+import SetForm from "../components/set/SetForm";
 
 export class BarrelsFormSetView extends React.Component {
     render() {
