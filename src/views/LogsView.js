@@ -20,10 +20,6 @@ export class LogsView extends React.Component {
         this.fetchLogs();
     }
 
-    handleRefresh = () => {
-        this.fetchLogs();
-    }
-
     handleChangePageTapLogs = (event, value) => {
         this.fetchBarrelTapLogs(value - 1);
     }
@@ -55,7 +51,6 @@ export class LogsView extends React.Component {
         return (
             <div className="container-fluid">
                 <Heading>Logi</Heading>
-
                 <h3>Zużycie</h3>
                 {barrelTapLogs.content.length === 0 && <p className="text-center">Brak danych</p>}
                 <Container className="table-responsive bg-light">
@@ -94,6 +89,10 @@ export class LogsView extends React.Component {
                         <Pagination count={barrelTapLogs.totalPages} color="primary" onChange={this.handleChangePageTapLogs}/>
                     </PaginationContainer>}
                 </Container>
+                <Nav>
+                    <a className="btn btn-light" href={API_URL + "/logs/barrelTaps/csv"} role="button">Eksportuj dane</a>
+                </Nav>
+
                 <h3>Temperatura</h3>
                 {barrelTemperatureLogs.content.length === 0 && <p className="text-center">Brak danych</p>}
                 <Container className="table-responsive bg-light">
@@ -145,4 +144,12 @@ const PaginationContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
+`;
+
+const Nav = styled.div`
+  text-align: right;
+  margin: 2rem 0;
+  > * {
+    margin: 0 0.5rem;
+  }
 `;

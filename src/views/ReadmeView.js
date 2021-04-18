@@ -5,7 +5,8 @@ import {API_URL} from "../service/Api";
 export class ReadmeView extends React.Component {
 
     state = {
-        barrels: []
+        barrels: [],
+        isDev: true
     }
 
     componentDidMount() {
@@ -32,18 +33,14 @@ export class ReadmeView extends React.Component {
     }
 
     render() {
-        const { barrels } = this.state;
+        const { barrels, isDev } = this.state;
         return (
             <div className="container">
                 <Heading>Instrukcja</Heading>
 
-                <div className="alert alert-danger" role="alert">
+                {isDev && <div className="alert alert-danger" role="alert">
                     Uwaga! Pracujesz w środowisku testowym.
-                </div>
-
-                <div className="alert alert-primary" role="alert">
-                    Front-end: React, Back-end: Java + Spring Boot, Baza danych: MongoDB
-                </div>
+                </div>}
 
                 <Instruction>
                     <h2>Tworzenie kraników</h2>
@@ -85,9 +82,9 @@ export class ReadmeView extends React.Component {
 
                 <Instruction>
                     <h2>Komunikacja ze sterownikiem</h2>
-                    <Button type="button" className="btn btn-success" onClick={this.handleEnableTaps}>Aktywuj kraniki</Button>
-                    <Button type="button" className="btn btn-primary" onClick={this.handleEnableTaps}>Odśwież kraniki</Button>
-                    <Button type="button" className="btn btn-danger" onClick={this.handleDisableTaps}>Dezaktywuj kraniki</Button>
+                    <Button type="button" className="btn btn-success" onClick={this.handleEnableTaps}>Aktywuj</Button>
+                    <Button type="button" className="btn btn-primary" onClick={this.handleEnableTaps}>Odśwież</Button>
+                    <Button type="button" className="btn btn-danger" onClick={this.handleDisableTaps}>Dezaktywuj</Button>
                 </Instruction>
 
                 <Instruction>

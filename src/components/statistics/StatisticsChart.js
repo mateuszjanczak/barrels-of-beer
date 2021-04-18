@@ -9,19 +9,19 @@ class StatisticsChart extends React.Component {
     }
 
     componentDidUpdate() {
-        this.myChart.data.labels = [...this.props.data.dates.map(item => item.date)];
-        this.myChart.data.datasets[0].data = [...this.props.data.dates.map(item => item.count / 1000)];
+        this.myChart.data.labels = [...this.props.data.items.map(item => item.date)];
+        this.myChart.data.datasets[0].data = [...this.props.data.items.map(item => item.count / 1000)];
         this.myChart.update();
     }
 
     componentDidMount() {
-        const labels = [...this.props.data.dates.map(item => item.date)];
+        const labels = [...this.props.data.items.map(item => item.date)];
 
         const data = {
             labels: labels,
             datasets: [{
                 label: 'L',
-                data: this.props.data.dates.map(item => item.count / 1000),
+                data: this.props.data.items.map(item => item.count / 1000),
                 backgroundColor: "#efa75e",
                 borderWidth: 1
             }]
@@ -49,7 +49,7 @@ class StatisticsChart extends React.Component {
                         },
                         ticks: {
                             beginAtZero: true,
-                            suggestedMax: 1.5 * Math.max(...this.props.data.dates.map(item => parseInt(item.count) / 1000))
+                            suggestedMax: 1.5 * Math.max(...this.props.data.items.map(item => parseInt(item.count) / 1000))
                         }
                     }]
                 }
