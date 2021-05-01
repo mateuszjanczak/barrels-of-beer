@@ -13,6 +13,10 @@ export class LogsView extends React.Component {
         barrelTemperatureLogs: {
             content: [],
             totalPages: 0
+        },
+        beerLogs: {
+            content: [],
+            totalPages: 0
         }
     }
 
@@ -28,9 +32,14 @@ export class LogsView extends React.Component {
         this.fetchBarrelTemperatureLogs(value - 1);
     }
 
+    handleChangePageBeerLogs = (event, value) => {
+        this.fetchBeerLogs(value - 1);
+    }
+
     fetchLogs = () => {
         this.fetchBarrelTapLogs(0);
         this.fetchBarrelTemperatureLogs(0);
+        this.fetchBeerLogs(0);
     }
 
     fetchBarrelTapLogs = (page) => {
@@ -45,8 +54,21 @@ export class LogsView extends React.Component {
             .then(barrelTemperatureLogs  => this.setState({ barrelTemperatureLogs }));
     }
 
+    fetchBeerLogs = (page) => {
+        fetch(API_URL + '/logs/beers/' + page)
+            .then(data => data.json())
+            .then(beerLogs  => this.setState({ beerLogs }));
+    }
+
+    generateBeerStatistics = () => {
+        fetch(API_URL + '/logs/beers/update', { method: 'POST'})
+            .then(() => {
+                this.fetchBeerLogs(0);
+            })
+    }
+
     render() {
-        const { barrelTapLogs, barrelTemperatureLogs } = this.state;
+        const { barrelTapLogs, barrelTemperatureLogs, beerLogs } = this.state;
 
         return (
             <div className="container-fluid">
@@ -91,6 +113,43 @@ export class LogsView extends React.Component {
                 </Container>
                 {barrelTapLogs.content.length > 0 && <Nav>
                     <a className="btn btn-light" href={API_URL + "/logs/barrelTaps/csv"} role="button">Eksportuj dane</a>
+                </Nav>}
+
+                <h3>Piwo</h3>
+                {beerLogs.content.length === 0 && <p className="text-center">Brak danych</p>}
+                <Container className="table-responsive bg-light">
+                    <table className="table mb-0">
+                        <thead>
+                        {beerLogs.content.length > 0 &&
+                        <tr>
+                            <th scope="col">Identyfikator operacji</th>
+                            <th scope="col">Zawartość beczki</th>
+                            <th scope="col">Operacje z kraników</th>
+                            <th scope="col">Ilość</th>
+                            <th scope="col">Początkowa data</th>
+                            <th scope="col">Końcowa data</th>
+                        </tr>}
+                        </thead>
+                        <tbody>
+                        {beerLogs.content.map(({id, barrelContent, barrelTapLogs, amount, startDate, endDate}) => (
+                            <tr key={id}>
+                                <th scope="row">{id}</th>
+                                <td>{barrelContent}</td>
+                                <td>[{barrelTapLogs.join(", ")}]</td>
+                                <td>{amount / 1000} L</td>
+                                <td>{startDate.substring(0, 19).replace('T', ' ')}</td>
+                                <td>{endDate.substring(0, 19).replace('T', ' ')}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                    {beerLogs.content.length > 0 && <PaginationContainer>
+                        <Pagination count={beerLogs.totalPages} color="primary" onChange={this.handleChangePageBeerLogs}/>
+                    </PaginationContainer>}
+                </Container>
+
+                {barrelTapLogs.content.length > 0 && <Nav>
+                    <button className="btn btn-light" onClick={this.generateBeerStatistics}>Oblicz dane</button>
                 </Nav>}
 
                 <h3>Temperatura</h3>
