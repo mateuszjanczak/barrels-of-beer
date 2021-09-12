@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {routes} from "../routes/Routes";
 import {API_URL} from "../service/Api";
+import AuthService from "../service/AuthService";
 
 export class BarrelsView extends React.Component {
 
@@ -16,9 +17,20 @@ export class BarrelsView extends React.Component {
     }
 
     fetchBarrels = () => {
-        fetch(API_URL + '/barrelTaps')
-            .then(data => data.json())
-            .then(barrels  => this.setState({ barrels }));
+        fetch(`${API_URL}/barrelTaps`, {
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        }).then(res => {
+            if (!res.ok) throw res;
+            return res.json();
+        })
+            .then(barrels => this.setState({barrels}))
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     handleRefresh = () => {
@@ -38,7 +50,8 @@ export class BarrelsView extends React.Component {
                 </Nav>
 
                 <Items>
-                    {this.state.barrels.map(details => (<Barrel key={details.id} fetchBarrelsFn={this.fetchBarrels} details={details}/>))}
+                    {this.state.barrels.map(details => (
+                        <Barrel key={details.id} fetchBarrelsFn={this.fetchBarrels} details={details}/>))}
                 </Items>
             </Wrapper>
         )
@@ -57,6 +70,7 @@ const Heading = styled.h1`
 const Nav = styled.div`
   text-align: center;
   margin: 2rem 0;
+
   > * {
     margin: 0 0.5rem;
   }
@@ -68,7 +82,7 @@ const Items = styled.div`
   @media screen and (min-width: 810px) {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   @media screen and (min-width: 1050px) {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -76,7 +90,7 @@ const Items = styled.div`
   @media screen and (min-width: 1290px) {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   //grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
 `;

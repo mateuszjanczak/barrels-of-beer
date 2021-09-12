@@ -3,35 +3,31 @@ import styled from "styled-components";
 import {routes} from "../routes/Routes";
 import {withRouter} from "react-router-dom";
 import {Component} from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faBeer,
-    faDatabase,
-    faThermometerHalf
-} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faBeer, faDatabase, faThermometerHalf} from '@fortawesome/free-solid-svg-icons'
 
 class Barrel extends Component {
 
     handleHit = (barrelTapId) => {
-        const { history } = this.props;
+        const {history} = this.props;
         history.push(`${routes.barrelsHit}/${barrelTapId}`);
     }
 
     handleSet = (barrelTapId) => {
-        const { history } = this.props;
+        const {history} = this.props;
         history.push(`${routes.barrelsSet}/${barrelTapId}`);
     }
 
     render() {
-        const { details } = this.props;
-        const { barrelTapId, barrelContent, currentLevel, capacity, temperature} = details;
+        const {details} = this.props;
+        const {barrelTapId, barrelContent, currentLevel, capacity, temperature} = details;
         const percent = isNaN(currentLevel / capacity) ? 0 : currentLevel / capacity;
 
         return (
             <Wrapper>
                 <Details>
                     <h3>Kranik {barrelTapId}</h3>
-{/*
+                    {/*
                     <h4>{barrelName}</h4>
 */}
                     <h4>{barrelContent}</h4>
@@ -41,9 +37,9 @@ class Barrel extends Component {
                     <GrayImg src={BarrelImg} alt={"Barrel"}/>
                     <ColorImg percent={percent} src={BarrelImg} alt={"Barrel"}/>
                     <Status>
-                        <p><FontAwesomeIcon icon={faThermometerHalf} /> {temperature} °C</p>
-                        <p><FontAwesomeIcon icon={faBeer} /> {(capacity - currentLevel)/1000} L</p>
-                        <p><FontAwesomeIcon icon={faDatabase} /> {currentLevel/1000} / {capacity/1000} L</p>
+                        <p><FontAwesomeIcon icon={faThermometerHalf}/> {temperature} °C</p>
+                        <p><FontAwesomeIcon icon={faBeer}/> {(capacity - currentLevel) / 1000} L</p>
+                        <p><FontAwesomeIcon icon={faDatabase}/> {currentLevel / 1000} / {capacity / 1000} L</p>
                     </Status>
                 </Container>
 
@@ -51,7 +47,8 @@ class Barrel extends Component {
                     {/*
                     <button className="btn btn-primary" onClick={() => this.handleHit(barrelTapId)}>Nowy stan</button>
 */}
-                    <button className="btn btn-primary" onClick={() => this.handleSet(barrelTapId)}>Ustaw beczkę</button>
+                    <button className="btn btn-primary" onClick={() => this.handleSet(barrelTapId)}>Ustaw beczkę
+                    </button>
                 </Nav>
             </Wrapper>
         );

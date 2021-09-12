@@ -4,11 +4,11 @@ import HitForm from "../components/hit/HitForm";
 
 export class BarrelsFormHitView extends React.Component {
     render() {
-        const { id } = this.props.match.params;
+        const {id} = this.props.match.params;
 
         return (
             <Wrapper className="container">
-                <HitForm id={id} />
+                <HitForm id={id}/>
             </Wrapper>
         )
     }

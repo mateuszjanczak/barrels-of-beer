@@ -2,6 +2,7 @@ import {Component} from "react";
 import {routes} from "../../routes/Routes";
 import {withRouter} from "react-router-dom";
 import {API_URL} from "../../service/Api";
+import AuthService from "../../service/AuthService";
 
 class HitForm extends Component {
 
@@ -12,15 +13,19 @@ class HitForm extends Component {
     }
 
     componentDidMount() {
-        const { id } = this.props;
+        const {id} = this.props;
         this.setState({
             id
         })
     }
 
     handleFormSubmit = (barrelTapId) => {
-        const { currentLevel, temperature } = this.state;
-        fetch(API_URL + '/barrelTaps/' + barrelTapId + '/hit/currentLevel/' + currentLevel + '/temperature/' + temperature).then(() => this.props.history.push(routes.barrels))
+        const {currentLevel, temperature} = this.state;
+        fetch(`${API_URL}/barrelTaps/${barrelTapId}/hit/currentLevel/${currentLevel}/temperature/${temperature}`, {
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        }).then(() => this.props.history.push(routes.barrels))
     }
 
     handleChange = (e) => {
@@ -29,7 +34,7 @@ class HitForm extends Component {
 
     render() {
 
-        const { currentLevel, temperature, id } = this.state;
+        const {currentLevel, temperature, id} = this.state;
 
         return (
             <div>
@@ -40,12 +45,14 @@ class HitForm extends Component {
 
                 <div className="mb-3">
                     <label htmlFor="counter" className="form-label">Nowy stan licznika</label>
-                    <input type="number" className="form-control" id="currentLevel" name="currentLevel" value={currentLevel} onChange={this.handleChange}/>
+                    <input type="number" className="form-control" id="currentLevel" name="currentLevel"
+                           value={currentLevel} onChange={this.handleChange}/>
                 </div>
 
                 <div className="mb-3">
                     <label htmlFor="temperature" className="form-label">Nowy stan temperatury</label>
-                    <input type="number" className="form-control" id="temperature" name="temperature" value={temperature} onChange={this.handleChange}/>
+                    <input type="number" className="form-control" id="temperature" name="temperature"
+                           value={temperature} onChange={this.handleChange}/>
                 </div>
 
                 <button className="btn btn-primary" onClick={() => this.handleFormSubmit(id)}>Ustaw</button>

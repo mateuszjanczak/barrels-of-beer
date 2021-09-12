@@ -59,7 +59,7 @@ class StatisticsChart extends React.Component {
     }
 
     render() {
-        return <canvas ref={this.chartRef} />;
+        return <canvas ref={this.chartRef}/>;
     }
 }
 

@@ -2,6 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import {API_URL} from "../service/Api";
 import {Pagination} from "@material-ui/lab";
+import AuthService from "../service/AuthService";
+import {routes} from "../routes/Routes";
 
 export class LogsView extends React.Component {
 
@@ -43,32 +45,81 @@ export class LogsView extends React.Component {
     }
 
     fetchBarrelTapLogs = (page) => {
-        fetch(API_URL + '/logs/barrelTaps/' + page)
-            .then(data => data.json())
-            .then(barrelTapLogs  => this.setState({ barrelTapLogs }));
+        fetch(`${API_URL}/logs/barrelTaps/${page}`, {
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        })
+            .then(res => {
+                if (!res.ok) throw res;
+                return res.json();
+            })
+            .then(barrelTapLogs => this.setState({barrelTapLogs}))
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     fetchBarrelTemperatureLogs = (page) => {
-        fetch(API_URL + '/logs/barrelTemperature/' + page)
-            .then(data => data.json())
-            .then(barrelTemperatureLogs  => this.setState({ barrelTemperatureLogs }));
+        fetch(`${API_URL}/logs/barrelTemperature/${page}`, {
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        })
+            .then(res => {
+                if (!res.ok) throw res;
+                return res.json();
+            })
+            .then(barrelTemperatureLogs => this.setState({barrelTemperatureLogs}))
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     fetchBeerLogs = (page) => {
-        fetch(API_URL + '/logs/beers/' + page)
-            .then(data => data.json())
-            .then(beerLogs  => this.setState({ beerLogs }));
+        fetch(`${API_URL}/logs/beers/${page}`, {
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        })
+            .then(res => {
+                if (!res.ok) throw res;
+                return res.json();
+            })
+            .then(beerLogs => this.setState({beerLogs}))
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     generateBeerStatistics = () => {
-        fetch(API_URL + '/logs/beers/update', { method: 'POST'})
+        fetch(`${API_URL}/logs/beers/update`, {
+            method: 'POST',
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        })
+            .then(res => {
+                if (!res.ok) throw res;
+            })
             .then(() => {
                 this.fetchBeerLogs(0);
             })
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     render() {
-        const { barrelTapLogs, barrelTemperatureLogs, beerLogs } = this.state;
+        const {barrelTapLogs, barrelTemperatureLogs, beerLogs} = this.state;
 
         return (
             <div className="container-fluid">
@@ -92,15 +143,25 @@ export class LogsView extends React.Component {
                         </tr>}
                         </thead>
                         <tbody>
-                        {barrelTapLogs.content.map(({id, barrelTapId, barrelName, barrelContent, currentLevel, totalUsage, singleUsage, date, logType}) => (
+                        {barrelTapLogs.content.map(({
+                                                        id,
+                                                        barrelTapId,
+                                                        barrelName,
+                                                        barrelContent,
+                                                        currentLevel,
+                                                        totalUsage,
+                                                        singleUsage,
+                                                        date,
+                                                        logType
+                                                    }) => (
                             <tr key={id}>
                                 <th scope="row">{id}</th>
                                 <td>{barrelTapId}</td>
                                 <td>{barrelName}</td>
                                 <td>{barrelContent}</td>
-                                <td>{currentLevel/1000} L</td>
-                                <td>{totalUsage/1000} L</td>
-                                <td>{singleUsage/1000} L</td>
+                                <td>{currentLevel / 1000} L</td>
+                                <td>{totalUsage / 1000} L</td>
+                                <td>{singleUsage / 1000} L</td>
                                 <td>{date.substring(0, 19).replace('T', ' ')}</td>
                                 <td>{logType}</td>
                             </tr>
@@ -108,11 +169,13 @@ export class LogsView extends React.Component {
                         </tbody>
                     </table>
                     {barrelTapLogs.content.length > 0 && <PaginationContainer>
-                        <Pagination count={barrelTapLogs.totalPages} color="primary" onChange={this.handleChangePageTapLogs}/>
+                        <Pagination count={barrelTapLogs.totalPages} color="primary"
+                                    onChange={this.handleChangePageTapLogs}/>
                     </PaginationContainer>}
                 </Container>
                 {barrelTapLogs.content.length > 0 && <Nav>
-                    <a className="btn btn-light" href={API_URL + "/logs/barrelTaps/csv"} role="button">Eksportuj dane</a>
+                    <a className="btn btn-light" href={API_URL + "/logs/barrelTaps/csv"} role="button">Eksportuj
+                        dane</a>
                 </Nav>}
 
                 <h3>Piwo</h3>
@@ -144,7 +207,8 @@ export class LogsView extends React.Component {
                         </tbody>
                     </table>
                     {beerLogs.content.length > 0 && <PaginationContainer>
-                        <Pagination count={beerLogs.totalPages} color="primary" onChange={this.handleChangePageBeerLogs}/>
+                        <Pagination count={beerLogs.totalPages} color="primary"
+                                    onChange={this.handleChangePageBeerLogs}/>
                     </PaginationContainer>}
                 </Container>
 
@@ -168,7 +232,14 @@ export class LogsView extends React.Component {
                         </tr>}
                         </thead>
                         <tbody>
-                        {barrelTemperatureLogs.content.map(({id, barrelTapId, barrelName, barrelContent, temperature, date}) => (
+                        {barrelTemperatureLogs.content.map(({
+                                                                id,
+                                                                barrelTapId,
+                                                                barrelName,
+                                                                barrelContent,
+                                                                temperature,
+                                                                date
+                                                            }) => (
                             <tr key={id}>
                                 <th scope="row">{id}</th>
                                 <td>{barrelTapId}</td>
@@ -181,7 +252,8 @@ export class LogsView extends React.Component {
                         </tbody>
                     </table>
                     {barrelTemperatureLogs.content.length > 0 && <PaginationContainer>
-                        <Pagination count={barrelTemperatureLogs.totalPages} color="primary" onChange={this.handleChangePageTemperatureLogs}/>
+                        <Pagination count={barrelTemperatureLogs.totalPages} color="primary"
+                                    onChange={this.handleChangePageTemperatureLogs}/>
                     </PaginationContainer>}
                 </Container>
             </div>
@@ -208,6 +280,7 @@ const PaginationContainer = styled.div`
 const Nav = styled.div`
   text-align: right;
   margin: 2rem 0;
+
   > * {
     margin: 0 0.5rem;
   }

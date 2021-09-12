@@ -1,6 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import {API_URL} from "../service/Api";
+import AuthService from "../service/AuthService";
+import {routes} from "../routes/Routes";
 
 export class AdminView extends React.Component {
 
@@ -14,28 +16,74 @@ export class AdminView extends React.Component {
     }
 
     fetchBarrels = () => {
-        fetch(API_URL + '/barrelTaps')
-            .then(data => data.json())
-            .then(barrels => this.setState({barrels}));
+        fetch(`${API_URL}/barrelTaps`, {
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        })
+            .then(res => {
+                if (!res.ok) throw res;
+                return res.json();
+            })
+            .then(barrels => this.setState({barrels}))
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     handleResetDatabase = (table) => {
         const c = window.confirm("Czy na pewno chcesz usunąć tą zawartość bazy danych?");
         if (c) fetch(`${API_URL}/admin/resetDatabase/${table}`, {
-            method: 'POST'
-        });
+            method: 'POST',
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        }).then(res => {
+            if (!res.ok) throw res;
+            return res.json();
+        })
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     handleEnableTap = (id) => {
         fetch(`${API_URL}/admin/barrelTaps/${id}/enable/1`, {
-            method: 'POST'
-        });
+            method: 'POST',
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        }).then(res => {
+            if (!res.ok) throw res;
+            return res.json();
+        })
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     handleDisableTap = (id) => {
         fetch(`${API_URL}/admin/barrelTaps/${id}/enable/0`, {
-            method: 'POST'
-        });
+            method: 'POST',
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        })
+            .then(res => {
+                if (!res.ok) throw res;
+                return res.json();
+            })
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     render() {
@@ -86,7 +134,8 @@ export class AdminView extends React.Component {
                                 Dane o zarejestrowanych kranikach
                             </span>
                             <span className="d-flex justify-content-end">
-                                <Button type="button" className="btn btn-danger" onClick={() => this.handleResetDatabase('BARREL_TAP')}>Wyczyść bazę danych</Button>
+                                <Button type="button" className="btn btn-danger"
+                                        onClick={() => this.handleResetDatabase('BARREL_TAP')}>Wyczyść bazę danych</Button>
                             </span>
                         </li>
                         <li className="list-group-item list-group-item-info">
@@ -94,7 +143,8 @@ export class AdminView extends React.Component {
                                 Logi z kraników - przepływ cieczy
                             </span>
                             <span className="d-flex justify-content-end">
-                                <Button type="button" className="btn btn-danger" onClick={() => this.handleResetDatabase('BARREL_TAP_LOG')}>Wyczyść bazę danych</Button>
+                                <Button type="button" className="btn btn-danger"
+                                        onClick={() => this.handleResetDatabase('BARREL_TAP_LOG')}>Wyczyść bazę danych</Button>
                             </span>
                         </li>
                         <li className="list-group-item list-group-item-info">
@@ -102,7 +152,8 @@ export class AdminView extends React.Component {
                                 Logi z kraników - temperatura
                             </span>
                             <span className="d-flex justify-content-end">
-                                <Button type="button" className="btn btn-danger" onClick={() => this.handleResetDatabase('BARREL_TEMPERATURE_LOG')}>Wyczyść bazę danych</Button>
+                                <Button type="button" className="btn btn-danger"
+                                        onClick={() => this.handleResetDatabase('BARREL_TEMPERATURE_LOG')}>Wyczyść bazę danych</Button>
                             </span>
                         </li>
                         <li className="list-group-item list-group-item-info">
@@ -110,7 +161,8 @@ export class AdminView extends React.Component {
                                 Logi z piwem
                             </span>
                             <span className="d-flex justify-content-end">
-                                <Button type="button" className="btn btn-danger" onClick={() => this.handleResetDatabase('BEER_LOG')}>Wyczyść bazę danych</Button>
+                                <Button type="button" className="btn btn-danger"
+                                        onClick={() => this.handleResetDatabase('BEER_LOG')}>Wyczyść bazę danych</Button>
                             </span>
                         </li>
                     </ul>

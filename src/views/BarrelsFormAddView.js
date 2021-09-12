@@ -6,7 +6,7 @@ export class BarrelsFormAddView extends React.Component {
     render() {
         return (
             <Wrapper className="container">
-                <AddForm />
+                <AddForm/>
             </Wrapper>
         )
     }

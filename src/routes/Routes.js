@@ -9,5 +9,7 @@ export const routes = {
     ranking: '/ranking',
     statistics: '/statistics',
     logs: '/logs',
-    admin: '/admin'
+    admin: '/admin',
+    login: '/login',
+    logout: '/logout'
 }

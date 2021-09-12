@@ -2,6 +2,7 @@ import {Component} from "react";
 import {routes} from "../../routes/Routes";
 import {withRouter} from "react-router-dom";
 import {API_URL} from "../../service/Api";
+import AuthService from "../../service/AuthService";
 
 class SetForm extends Component {
 
@@ -13,7 +14,7 @@ class SetForm extends Component {
     }
 
     componentDidMount() {
-        const { id } = this.props;
+        const {id} = this.props;
         this.setState({
             id
         })
@@ -22,16 +23,21 @@ class SetForm extends Component {
     }
 
     fetchBarrel = (barrelTapId) => {
-        fetch(API_URL + '/barrelTaps/' + barrelTapId).then(data => data.json()).then(barrel => this.setState({...barrel}))
+        fetch(`${API_URL}/barrelTaps/${barrelTapId}`, {
+            headers: {
+                'Authorization': AuthService.getHeaders()
+            }
+        }).then(data => data.json()).then(barrel => this.setState({...barrel}))
     }
 
     handleFormSubmit = (barrelTapId) => {
-        const { barrelName, barrelContent, capacity } = this.state;
+        const {barrelName, barrelContent, capacity} = this.state;
 
-        fetch(API_URL + '/barrelTaps/' + barrelTapId + '/set', {
+        fetch(`${API_URL}/barrelTaps/${barrelTapId}/set`, {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': AuthService.getHeaders()
             },
             method: 'POST',
             body: JSON.stringify({
@@ -39,7 +45,17 @@ class SetForm extends Component {
                 barrelContent,
                 capacity
             })
-        }).then(() => this.props.history.push(routes.barrels))
+        })
+            .then(res => {
+                if (!res.ok) throw res;
+                return res.json();
+            })
+            .then(() => this.props.history.push(routes.barrels))
+            .catch(error => {
+                if (error.status === 401) {
+                    this.props.history.push(routes.logout);
+                }
+            });
     }
 
     handleChange = (e) => {
@@ -48,7 +64,7 @@ class SetForm extends Component {
 
     render() {
 
-        const {barrelName, barrelContent, capacity, id } = this.state;
+        const {barrelName, barrelContent, capacity, id} = this.state;
 
         return (
             <div>
@@ -59,12 +75,14 @@ class SetForm extends Component {
 
                 <div className="mb-3">
                     <label htmlFor="beerType" className="form-label">Kod beczki</label>
-                    <input type="text" className="form-control" id="barrelName" name="barrelName" value={barrelName} onChange={this.handleChange}/>
+                    <input type="text" className="form-control" id="barrelName" name="barrelName" value={barrelName}
+                           onChange={this.handleChange}/>
                 </div>
 
                 <div className="mb-3">
                     <label htmlFor="barrelContent" className="form-label">Typ piwa</label>
-                    <select className="form-select" id="barrelContent" name="barrelContent" value={barrelContent} onChange={this.handleChange}>
+                    <select className="form-select" id="barrelContent" name="barrelContent" value={barrelContent}
+                            onChange={this.handleChange}>
                         <option defaultChecked>Wybierz z listy</option>
                         <option value="CHMYZ_Pils">CHMYZ Pils</option>
                         <option value="GAZDA_Marcowe">GAZDA Marcowe</option>
@@ -78,7 +96,8 @@ class SetForm extends Component {
 
                 <div className="mb-3">
                     <label htmlFor="capacity" className="form-label">Ilość piwa w [ml]</label>
-                    <input type="number" className="form-control" id="capacity" name="capacity" value={capacity} onChange={this.handleChange}/>
+                    <input type="number" className="form-control" id="capacity" name="capacity" value={capacity}
+                           onChange={this.handleChange}/>
                 </div>
                 <button className="btn btn-primary" onClick={() => this.handleFormSubmit(id)}>Ustaw</button>
             </div>
