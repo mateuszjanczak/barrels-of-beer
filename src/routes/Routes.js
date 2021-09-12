@@ -9,5 +9,5 @@ export const routes = {
     ranking: '/ranking',
     statistics: '/statistics',
     logs: '/logs',
-    readme: '/readme'
+    admin: '/admin'
 }

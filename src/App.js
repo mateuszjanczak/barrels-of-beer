@@ -13,9 +13,9 @@ import {RankingView} from "./views/RankingView";
 import {BarrelsFormAddView} from "./views/BarrelsFormAddView";
 import {BarrelsFormSetView} from "./views/BarrelsFormSetView";
 import {LogsView} from "./views/LogsView";
-import {ReadmeView} from "./views/ReadmeView";
 import {StatisticsView} from "./views/StatisticsView";
 import {BarrelsFormHitView} from "./views/BarrelsFormHitView";
+import {AdminView} from "./views/AdminView";
 
 const App = () => (
     <Router>
@@ -28,7 +28,7 @@ const App = () => (
                 <Route exact path={routes.statistics} component={StatisticsView} />
                 <Route exact path={routes.barrelsAdd} component={BarrelsFormAddView} />
                 <Route exact path={routes.logs} component={LogsView} />
-                <Route exact path={routes.readme} component={ReadmeView} />
+                <Route exact path={routes.admin} component={AdminView} />
                 <Route path={routes.barrelsSetId} component={BarrelsFormSetView} />
                 <Route path={routes.barrelsHitId} component={BarrelsFormHitView} />
             </Switch>
