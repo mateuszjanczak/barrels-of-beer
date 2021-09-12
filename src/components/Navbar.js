@@ -46,7 +46,7 @@ class Navbar extends Component {
                                 <NavLink to={routes.logs} className="nav-link active" onClick={this.offNav}>Logi</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={routes.readme} className="nav-link active fw-bold" onClick={this.offNav}>Instrukcja</NavLink>
+                                <NavLink to={routes.admin} className="nav-link active fw-bold" onClick={this.offNav}>Panel administratora</NavLink>
                             </li>
                         </ul>
                     </div>
