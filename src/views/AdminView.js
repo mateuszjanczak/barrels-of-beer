@@ -38,6 +38,13 @@ export class AdminView extends React.Component {
         });
     }
 
+    handleResetTap = (id) => {
+        const c = window.confirm(`Czy na pewno chcesz usunąć kranik nr ${id}?`);
+        if (c) fetch(`${API_URL}/admin/barrelTaps/${id}/reset`, {
+            method: 'POST'
+        });
+    }
+
     render() {
         const {barrels, isDev} = this.state;
         return (
@@ -60,8 +67,10 @@ export class AdminView extends React.Component {
                                 <span className="d-flex justify-content-end">
                                     <Button type="button" className="btn btn-success"
                                             onClick={() => this.handleEnableTap(barrel.barrelTapId)}>Aktywuj</Button>
-                                    <Button type="button" className="btn btn-danger"
+                                    <Button type="button" className="btn btn-warning"
                                             onClick={() => this.handleDisableTap(barrel.barrelTapId)}>Dezaktywuj</Button>
+                                    <Button type="button" className="btn btn-danger"
+                                            onClick={() => this.handleResetTap(barrel.barrelTapId)}>Usuń</Button>
                                 </span>
                             </li>
                         ))}
